@@ -62,6 +62,9 @@ public struct SnackBarView: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .transition(.move(edge: .bottom))
             .animation(.default)
+            .onTapGesture {
+                isPresented = false
+            }
             .onAppear {
                 dismissWorkItem = scheduler.asyncAfter(deadline: .now() + 1) {
                     isPresented = false
