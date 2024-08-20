@@ -34,33 +34,35 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     }
     
     public func body(content: Content) -> some View {
-        content
-            .overlay(
-                ZStack {
-                    VStack {
-                        content
-                            .modifier(NonAnimationFullScreenModifier(isPresented: $isPresented, contentView: contentView, disappear: {}))
-                            .onChange(of: isPresented) { _ in
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                    isPresented = false
-                                }
-                            }
-                            .readFrame(for: $contentFrame)
-                            .position(
-                                x: contentFrame.width / 2 + currentOffset.x,
-                                y: contentFrame.height / 2 + currentOffset.y
-                            )
-                            .onChange(of: isPresented) { newValue in
-                                
-                                DispatchQueue.main.async {
-                                    withAnimation(.easeOut(duration: 0.3)) {
-                                        currentOffset = CGPointMake(displayOffsetX, displayOffsetY)
+        ZStack {
+            content
+            
+            Color.clear
+                .overlay(
+                    Group {
+                        if isPresented {
+                            contentView()
+                                .onChange(of: isPresented) { _ in
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        isPresented = false
                                     }
                                 }
-                            }
+                                .readFrame(for: $contentFrame)
+                                .position(
+                                    x: contentFrame.width / 2 + currentOffset.x,
+                                    y: contentFrame.height / 2 + currentOffset.y
+                                )
+                                .onChange(of: isPresented) { newValue in
+                                    
+                                    DispatchQueue.main.async {
+                                        withAnimation(.easeOut(duration: 0.3)) {
+                                            currentOffset = CGPointMake(displayOffsetX, displayOffsetY)
+                                        }
+                                    }
+                                }
+                        }
                     }
-                }
-            )
+                )
+        }
     }
 }
-
