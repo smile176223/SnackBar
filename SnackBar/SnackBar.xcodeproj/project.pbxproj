@@ -11,6 +11,10 @@
 		0C74D99F2C6F36F500DFC854 /* SnackBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C74D99E2C6F36F500DFC854 /* SnackBarTests.swift */; };
 		0C74D9A02C6F36F500DFC854 /* SnackBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C74D9942C6F36F500DFC854 /* SnackBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C74D9AA2C6F374F00DFC854 /* SnackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */; };
+		0C8BADAF2C747C1A006478C4 /* SnackBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */; };
+		0C8BADB22C747CE6006478C4 /* DispatchQueue+Exntension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */; };
+		0C8BADB62C747D31006478C4 /* NonAnimationFullScreenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB52C747D31006478C4 /* NonAnimationFullScreenModifier.swift */; };
+		0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB82C747D55006478C4 /* View+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,10 @@
 		0C74D9992C6F36F500DFC854 /* SnackBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnackBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C74D99E2C6F36F500DFC854 /* SnackBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarTests.swift; sourceTree = "<group>"; };
 		0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarView.swift; sourceTree = "<group>"; };
+		0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarModifier.swift; sourceTree = "<group>"; };
+		0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Exntension.swift"; sourceTree = "<group>"; };
+		0C8BADB52C747D31006478C4 /* NonAnimationFullScreenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonAnimationFullScreenModifier.swift; sourceTree = "<group>"; };
+		0C8BADB82C747D55006478C4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +79,12 @@
 		0C74D9932C6F36F500DFC854 /* SnackBar */ = {
 			isa = PBXGroup;
 			children = (
+				0C8BADB72C747D48006478C4 /* Helpers */,
+				0C8BADB02C747CD8006478C4 /* Scheduler */,
 				0C74D9942C6F36F500DFC854 /* SnackBar.h */,
 				0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */,
+				0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */,
+				0C8BADB52C747D31006478C4 /* NonAnimationFullScreenModifier.swift */,
 			);
 			path = SnackBar;
 			sourceTree = "<group>";
@@ -83,6 +95,22 @@
 				0C74D99E2C6F36F500DFC854 /* SnackBarTests.swift */,
 			);
 			path = SnackBarTests;
+			sourceTree = "<group>";
+		};
+		0C8BADB02C747CD8006478C4 /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */,
+			);
+			path = Scheduler;
+			sourceTree = "<group>";
+		};
+		0C8BADB72C747D48006478C4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0C8BADB82C747D55006478C4 /* View+Extension.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,7 +223,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C8BADB62C747D31006478C4 /* NonAnimationFullScreenModifier.swift in Sources */,
 				0C74D9AA2C6F374F00DFC854 /* SnackBarView.swift in Sources */,
+				0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */,
+				0C8BADAF2C747C1A006478C4 /* SnackBarModifier.swift in Sources */,
+				0C8BADB22C747CE6006478C4 /* DispatchQueue+Exntension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,9 +303,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -331,9 +363,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -359,7 +391,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -368,7 +400,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -402,7 +434,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -411,7 +443,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -436,8 +468,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3F3N8USCH4;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.LiamHsu.SnackBarTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -458,8 +490,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3F3N8USCH4;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.LiamHsu.SnackBarTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
