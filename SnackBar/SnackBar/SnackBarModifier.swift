@@ -8,61 +8,172 @@
 import Foundation
 import SwiftUI
 
+// TODO: 1. Keyboard
+// TODO: 2. Orientation
+// TODO: 3. Tap to dismiss
+
 public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
-    @Binding private var isPresented: Bool
     var contentView: () -> ContentView
     
+    var animationCompletedCallback: () -> ()
+    var positionIsCalculatedCallback: () -> ()
+    var showContent: Bool
+    var shouldShowContent: Bool
+    private var useSafeAreaInset: Bool = true
+    private var verticalPadding: CGFloat = 10
     @State private var contentFrame: CGRect = .zero
+    @State private var presenterFrame: CGRect = .zero
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
+    @State private var actualCurrentOffset = CGPoint.pointFarAwayFromScreen
     
-    @State private var currentOffset = CGPoint(x: UIScreen.main.bounds.width * 2, y: UIScreen.main.bounds.height * 2)
+    public init(
+        contentView: @escaping () -> ContentView,
+        animationCompletedCallback: @escaping () -> (),
+        positionIsCalculatedCallback: @escaping () -> (),
+        showContent: Bool,
+        shouldShowContent: Bool
+    ) {
+        self.contentView = contentView
+        self.animationCompletedCallback = animationCompletedCallback
+        self.positionIsCalculatedCallback = positionIsCalculatedCallback
+        self.showContent = showContent
+        self.shouldShowContent = shouldShowContent
+    }
+    
+    private var screenSize: CGSize {
+        return UIApplication
+            .shared
+            .connectedScenes
+            .compactMap { scene -> UIWindow? in
+                (scene as? UIWindowScene)?.keyWindow
+            }
+            .first?
+            .frame
+            .size ?? .zero
+    }
     
     private var displayOffsetY: CGFloat {
-        UIScreen.main.bounds.height
+        presenterFrame.height
         - contentFrame.height
-        - safeAreaInsets.bottom
+        - verticalPadding
+        + safeAreaInsets.bottom
+        - (useSafeAreaInset ? safeAreaInsets.bottom : 0)
     }
     
     private var displayOffsetX: CGFloat {
-        (UIScreen.main.bounds.width - contentFrame.width) / 2
+        return (presenterFrame.width - contentFrame.width) / 2
     }
     
-    public init(isPresented: Binding<Bool>, contentView: @escaping () -> ContentView) {
-        _isPresented = isPresented
-        self.contentView = contentView
+    private var targetCurrentOffset: CGPoint {
+        shouldShowContent ? CGPoint(x: displayOffsetX, y: displayOffsetY) : hiddenOffset
+    }
+    
+    private var hiddenOffset: CGPoint {
+        if contentFrame.isEmpty {
+            return CGPoint.pointFarAwayFromScreen
+        }
+
+        return CGPoint(x: displayOffsetX, y: screenSize.height)
     }
     
     public func body(content: Content) -> some View {
-        ZStack {
-            content
-            
-            Color.clear
-                .overlay(
-                    Group {
-                        if isPresented {
-                            contentView()
-                                .onChange(of: isPresented) { _ in
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                        isPresented = false
-                                    }
-                                }
-                                .readFrame(for: $contentFrame)
-                                .position(
-                                    x: contentFrame.width / 2 + currentOffset.x,
-                                    y: contentFrame.height / 2 + currentOffset.y
-                                )
-                                .onChange(of: isPresented) { newValue in
-                                    
-                                    DispatchQueue.main.async {
-                                        withAnimation(.easeOut(duration: 0.3)) {
-                                            currentOffset = CGPointMake(displayOffsetX, displayOffsetY)
-                                        }
-                                    }
-                                }
+        content
+            .readFrame(for: $presenterFrame)
+            .safeAreaGetter($safeAreaInsets)
+            .overlay(
+                Group {
+                    if showContent, presenterFrame != .zero {
+                        snackBar()
+                    }
+                }
+            )
+    }
+    
+    @ViewBuilder
+    private func snackBar() -> some View {
+        if #available(iOS 17.0, *) {
+            ZStack {
+                VStack {
+                    contentView()
+                }
+                .readFrame(for: $contentFrame)
+                .position(x: contentFrame.width / 2 + actualCurrentOffset.x, y: contentFrame.height / 2 + actualCurrentOffset.y)
+                .onChange(of: shouldShowContent) { newValue in
+                    if actualCurrentOffset == CGPoint.pointFarAwayFromScreen {
+                        DispatchQueue.main.async {
+                            actualCurrentOffset = hiddenOffset
                         }
                     }
-                )
+                    
+                    DispatchQueue.main.async {
+                        withAnimation(.spring()) {
+                            changeParamsWithAnimation(newValue)
+                        } completion: {
+                            animationCompletedCallback()
+                        }
+                    }
+                }
+                .onChange(of: contentFrame.size) { _ in
+                    positionIsCalculatedCallback()
+                }
+            }
+        } else {
+            ZStack {
+                VStack {
+                    contentView()
+                }
+                .readFrame(for: $contentFrame)
+                .position(x: contentFrame.width / 2 + actualCurrentOffset.x, y: contentFrame.height / 2 + actualCurrentOffset.y)
+                .onChange(of: targetCurrentOffset) { newValue in
+                    if !shouldShowContent, newValue == hiddenOffset { // don't animate initial positioning outside the screen
+                        actualCurrentOffset = newValue
+                    } else {
+                        withAnimation(.spring()) {
+                            actualCurrentOffset = newValue
+                        }
+                    }
+                }
+                .onChange(of: contentFrame.size) { _ in
+                    positionIsCalculatedCallback()
+                }
+            }
         }
+    }
+    
+    func changeParamsWithAnimation(_ isDisplayAnimation: Bool) {
+        self.actualCurrentOffset = isDisplayAnimation ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
+    }
+}
+
+extension CGPoint {
+    static var pointFarAwayFromScreen: CGPoint {
+        CGPoint(x: UIScreen.main.bounds.width * 2, y: UIScreen.main.bounds.height * 2)
+    }
+}
+
+extension View {
+    public func safeAreaGetter(_ safeArea: Binding<EdgeInsets>) -> some View {
+        modifier(SafeAreaGetter(safeArea: safeArea))
+    }
+}
+
+struct SafeAreaGetter: ViewModifier {
+
+    @Binding var safeArea: EdgeInsets
+
+    func body(content: Content) -> some View {
+        content
+            .background(
+                GeometryReader { proxy -> AnyView in
+                    DispatchQueue.main.async {
+                        let area = proxy.safeAreaInsets
+                        if area != self.safeArea {
+                            self.safeArea = area
+                        }
+                    }
+                    return AnyView(EmptyView())
+                }
+            )
     }
 }
