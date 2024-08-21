@@ -10,13 +10,9 @@ import SwiftUI
 public struct SnackBarView: View {
     
     @State private var isPresented: Bool = false
-//    private let scheduler: Scheduler
-    @State private var dismissWorkItem: DispatchWorkItem? = nil
-    
     
     public var body: some View {
         ZStack {
-            
             Button {
                 isPresented.toggle()
             } label: {

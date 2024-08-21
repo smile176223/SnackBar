@@ -14,7 +14,12 @@ public extension View {
         contentView: @escaping () -> ContentView
     ) -> some View {
         self.modifier(
-            SnackBarModifier(isPresented: isPresented, contentView: contentView)
+            ContainerModifier(
+                isPresented: isPresented,
+                contentView: contentView,
+                userWillDismissCallback: {},
+                userDismissCallback: {}
+            )
         )
     }
 }
