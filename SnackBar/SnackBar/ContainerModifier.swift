@@ -62,8 +62,8 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     private func snackBarModifier() -> SnackBarModifier<ContentView> {
         SnackBarModifier(
             contentView: contentView,
-            animationCompletedCallback: onAnimationCompleted,
-            positionIsCalculatedCallback: {
+            onAnimationComplete: onAnimationCompleted,
+            onPositionChanged: {
                 if !closingIsInProcess {
                     DispatchQueue.main.async {
                         shouldShowContent = true
@@ -93,12 +93,6 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             userWillDismissCallback()
             dispatchWorkHolder.work?.cancel()
             shouldShowContent = false
-        }
-        
-        if #unavailable(iOS 17.0) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                onAnimationCompleted()
-            }
         }
     }
     

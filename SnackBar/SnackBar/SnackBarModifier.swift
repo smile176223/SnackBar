@@ -15,8 +15,8 @@ import SwiftUI
 public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     private var contentView: () -> ContentView
-    private var animationCompletedCallback: () -> ()
-    private var positionIsCalculatedCallback: () -> ()
+    private var onAnimationComplete: () -> ()
+    private var onPositionChanged: () -> ()
     private var showContent: Bool
     private var shouldShowContent: Bool
     private var useSafeAreaInset: Bool = true
@@ -29,15 +29,15 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     public init(
         contentView: @escaping () -> ContentView,
-        animationCompletedCallback: @escaping () -> (),
-        positionIsCalculatedCallback: @escaping () -> (),
+        onAnimationComplete: @escaping () -> (),
+        onPositionChanged: @escaping () -> (),
         showContent: Bool,
         shouldShowContent: Bool,
         screenSize: CGSize = UIApplication.screenSize
     ) {
         self.contentView = contentView
-        self.animationCompletedCallback = animationCompletedCallback
-        self.positionIsCalculatedCallback = positionIsCalculatedCallback
+        self.onAnimationComplete = onAnimationComplete
+        self.onPositionChanged = onPositionChanged
         self.showContent = showContent
         self.shouldShowContent = shouldShowContent
         self.screenSize = screenSize
@@ -55,15 +55,11 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         return (presenterFrame.width - contentFrame.width) / 2
     }
     
-    private var targetCurrentOffset: CGPoint {
-        shouldShowContent ? CGPoint(x: displayOffsetX, y: displayOffsetY) : hiddenOffset
-    }
-    
     private var hiddenOffset: CGPoint {
         if contentFrame.isEmpty {
             return CGPoint.outOfScreenPoint
         }
-
+        
         return CGPoint(x: displayOffsetX, y: screenSize.height)
     }
     
@@ -82,57 +78,46 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     @ViewBuilder
     private func snackBar() -> some View {
+        ZStack {
+            VStack {
+                contentView()
+            }
+            .readFrame($contentFrame)
+            .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
+            .onChange(of: shouldShowContent, perform: moveWithAnimation)
+            .onChange(of: contentFrame.size) { _ in onPositionChanged() }
+        }
+    }
+    
+    private func moveWithAnimation(_ value: Bool) {
+        if currentOffset == CGPoint.outOfScreenPoint {
+            DispatchQueue.main.async {
+                currentOffset = hiddenOffset
+            }
+        }
+        
         if #available(iOS 17.0, *) {
-            ZStack {
-                VStack {
-                    contentView()
-                }
-                .readFrame($contentFrame)
-                .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
-                .onChange(of: shouldShowContent) { newValue in
-                    if currentOffset == CGPoint.outOfScreenPoint {
-                        DispatchQueue.main.async {
-                            currentOffset = hiddenOffset
-                        }
-                    }
-                    
-                    DispatchQueue.main.async {
-                        withAnimation(.spring()) {
-                            changeParamsWithAnimation(newValue)
-                        } completion: {
-                            animationCompletedCallback()
-                        }
-                    }
-                }
-                .onChange(of: contentFrame.size) { value in
-                    positionIsCalculatedCallback()
+            DispatchQueue.main.async {
+                withAnimation(.spring()) {
+                    moveOffset(value)
+                } completion: {
+                    onAnimationComplete()
                 }
             }
         } else {
-            ZStack {
-                VStack {
-                    contentView()
+            DispatchQueue.main.async {
+                withAnimation(.spring()) {
+                    moveOffset(value)
                 }
-                .readFrame($contentFrame)
-                .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
-                .onChange(of: targetCurrentOffset) { newValue in
-                    if !shouldShowContent, newValue == hiddenOffset {
-                        currentOffset = newValue
-                    } else {
-                        withAnimation(.spring()) {
-                            currentOffset = newValue
-                        }
-                    }
-                }
-                .onChange(of: contentFrame.size) { _ in
-                    positionIsCalculatedCallback()
-                }
-                .onAppear(perform: positionIsCalculatedCallback)
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                onAnimationComplete()
             }
         }
     }
     
-    func changeParamsWithAnimation(_ isDisplayAnimation: Bool) {
-        self.currentOffset = isDisplayAnimation ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
+    private func moveOffset(_ value: Bool) {
+        currentOffset = value ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
     }
 }
