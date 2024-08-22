@@ -12,7 +12,6 @@
 		0C74D9A02C6F36F500DFC854 /* SnackBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C74D9942C6F36F500DFC854 /* SnackBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C74D9AA2C6F374F00DFC854 /* SnackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */; };
 		0C8BADAF2C747C1A006478C4 /* SnackBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */; };
-		0C8BADB22C747CE6006478C4 /* DispatchQueue+Exntension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */; };
 		0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB82C747D55006478C4 /* View+Extension.swift */; };
 		0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */; };
 		0CC996F42C76C3FA00597228 /* SafeAreaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F32C76C3FA00597228 /* SafeAreaReader.swift */; };
@@ -39,7 +38,6 @@
 		0C74D99E2C6F36F500DFC854 /* SnackBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarTests.swift; sourceTree = "<group>"; };
 		0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarView.swift; sourceTree = "<group>"; };
 		0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarModifier.swift; sourceTree = "<group>"; };
-		0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Exntension.swift"; sourceTree = "<group>"; };
 		0C8BADB82C747D55006478C4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerModifier.swift; sourceTree = "<group>"; };
 		0CC996F32C76C3FA00597228 /* SafeAreaReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaReader.swift; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				0C8BADB72C747D48006478C4 /* Helpers */,
-				0C8BADB02C747CD8006478C4 /* Scheduler */,
 				0C74D9942C6F36F500DFC854 /* SnackBar.h */,
 				0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */,
 				0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */,
@@ -105,14 +102,6 @@
 				0C74D99E2C6F36F500DFC854 /* SnackBarTests.swift */,
 			);
 			path = SnackBarTests;
-			sourceTree = "<group>";
-		};
-		0C8BADB02C747CD8006478C4 /* Scheduler */ = {
-			isa = PBXGroup;
-			children = (
-				0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */,
-			);
-			path = Scheduler;
 			sourceTree = "<group>";
 		};
 		0C8BADB72C747D48006478C4 /* Helpers */ = {
@@ -247,7 +236,6 @@
 				0CC996F42C76C3FA00597228 /* SafeAreaReader.swift in Sources */,
 				0CC996F82C76C92F00597228 /* CGPoint+Extension.swift in Sources */,
 				0CC996FC2C77129A00597228 /* ClassReference.swift in Sources */,
-				0C8BADB22C747CE6006478C4 /* DispatchQueue+Exntension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
