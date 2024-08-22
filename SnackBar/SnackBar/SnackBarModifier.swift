@@ -26,7 +26,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     @State private var contentFrame: CGRect = .zero
     @State private var presenterFrame: CGRect = .zero
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
-    @State private var actualCurrentOffset = CGPoint.outOfScreenPoint
+    @State private var currentOffset = CGPoint.outOfScreenPoint
     
     public init(
         contentView: @escaping () -> ContentView,
@@ -89,11 +89,11 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                     contentView()
                 }
                 .readFrame(for: $contentFrame)
-                .position(x: contentFrame.width / 2 + actualCurrentOffset.x, y: contentFrame.height / 2 + actualCurrentOffset.y)
+                .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
                 .onChange(of: shouldShowContent) { newValue in
-                    if actualCurrentOffset == CGPoint.outOfScreenPoint {
+                    if currentOffset == CGPoint.outOfScreenPoint {
                         DispatchQueue.main.async {
-                            actualCurrentOffset = hiddenOffset
+                            currentOffset = hiddenOffset
                         }
                     }
                     
@@ -115,13 +115,13 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                     contentView()
                 }
                 .readFrame(for: $contentFrame)
-                .position(x: contentFrame.width / 2 + actualCurrentOffset.x, y: contentFrame.height / 2 + actualCurrentOffset.y)
+                .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
                 .onChange(of: targetCurrentOffset) { newValue in
                     if !shouldShowContent, newValue == hiddenOffset { // don't animate initial positioning outside the screen
-                        actualCurrentOffset = newValue
+                        currentOffset = newValue
                     } else {
                         withAnimation(.spring()) {
-                            actualCurrentOffset = newValue
+                            currentOffset = newValue
                         }
                     }
                 }
@@ -133,6 +133,6 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     }
     
     func changeParamsWithAnimation(_ isDisplayAnimation: Bool) {
-        self.actualCurrentOffset = isDisplayAnimation ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
+        self.currentOffset = isDisplayAnimation ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
     }
 }
