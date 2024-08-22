@@ -117,7 +117,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                 .readFrame(for: $contentFrame)
                 .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
                 .onChange(of: targetCurrentOffset) { newValue in
-                    if !shouldShowContent, newValue == hiddenOffset { // don't animate initial positioning outside the screen
+                    if !shouldShowContent, newValue == hiddenOffset {
                         currentOffset = newValue
                     } else {
                         withAnimation(.spring()) {
