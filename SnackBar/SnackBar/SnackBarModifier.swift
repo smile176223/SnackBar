@@ -14,12 +14,11 @@ import SwiftUI
 
 public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
-    var contentView: () -> ContentView
-    
-    var animationCompletedCallback: () -> ()
-    var positionIsCalculatedCallback: () -> ()
-    var showContent: Bool
-    var shouldShowContent: Bool
+    private var contentView: () -> ContentView
+    private var animationCompletedCallback: () -> ()
+    private var positionIsCalculatedCallback: () -> ()
+    private var showContent: Bool
+    private var shouldShowContent: Bool
     private var useSafeAreaInset: Bool = true
     private var verticalPadding: CGFloat = 10
     private let screenSize: CGSize
@@ -90,24 +89,6 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                 }
                 .readFrame($contentFrame)
                 .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
-//                .onAppear {
-//                    if currentOffset == CGPoint.outOfScreenPoint {
-//                        DispatchQueue.main.async {
-//                            currentOffset = hiddenOffset
-//                        }
-//                    }
-//                    
-//                    DispatchQueue.main.async {
-//                        withAnimation(.spring()) {
-//                            changeParamsWithAnimation(true)
-//                        } completion: {
-//                            animationCompletedCallback()
-//                        }
-//                    }
-//                    
-//                    positionIsCalculatedCallback()
-//                    
-//                }
                 .onChange(of: shouldShowContent) { newValue in
                     if currentOffset == CGPoint.outOfScreenPoint {
                         DispatchQueue.main.async {
