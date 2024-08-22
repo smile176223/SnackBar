@@ -9,6 +9,6 @@ import SwiftUI
 
 extension CGPoint {
     static var outOfScreenPoint: CGPoint {
-        CGPoint(x: UIScreen.main.bounds.width, y: UIScreen.main.bounds.height)
+        CGPoint(x: UIApplication.screenSize.width, y: UIApplication.screenSize.height)
     }
 }
