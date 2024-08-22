@@ -16,7 +16,7 @@
 		0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB82C747D55006478C4 /* View+Extension.swift */; };
 		0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */; };
 		0CC996F42C76C3FA00597228 /* SafeAreaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F32C76C3FA00597228 /* SafeAreaReader.swift */; };
-		0CC996F62C76C88B00597228 /* FrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F52C76C88B00597228 /* FrameModifier.swift */; };
+		0CC996F62C76C88B00597228 /* FrameReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F52C76C88B00597228 /* FrameReader.swift */; };
 		0CC996F82C76C92F00597228 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */; };
 		0CC996FA2C76CC2900597228 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */; };
 		0CC996FC2C77129A00597228 /* ClassReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996FB2C77129A00597228 /* ClassReference.swift */; };
@@ -43,7 +43,7 @@
 		0C8BADB82C747D55006478C4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerModifier.swift; sourceTree = "<group>"; };
 		0CC996F32C76C3FA00597228 /* SafeAreaReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaReader.swift; sourceTree = "<group>"; };
-		0CC996F52C76C88B00597228 /* FrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameModifier.swift; sourceTree = "<group>"; };
+		0CC996F52C76C88B00597228 /* FrameReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameReader.swift; sourceTree = "<group>"; };
 		0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		0CC996FB2C77129A00597228 /* ClassReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassReference.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 			children = (
 				0C8BADB82C747D55006478C4 /* View+Extension.swift */,
 				0CC996F32C76C3FA00597228 /* SafeAreaReader.swift */,
-				0CC996F52C76C88B00597228 /* FrameModifier.swift */,
+				0CC996F52C76C88B00597228 /* FrameReader.swift */,
 				0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */,
 				0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */,
 				0CC996FB2C77129A00597228 /* ClassReference.swift */,
@@ -241,7 +241,7 @@
 				0C74D9AA2C6F374F00DFC854 /* SnackBarView.swift in Sources */,
 				0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */,
 				0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */,
-				0CC996F62C76C88B00597228 /* FrameModifier.swift in Sources */,
+				0CC996F62C76C88B00597228 /* FrameReader.swift in Sources */,
 				0CC996FA2C76CC2900597228 /* UIApplication+Extension.swift in Sources */,
 				0C8BADAF2C747C1A006478C4 /* SnackBarModifier.swift in Sources */,
 				0CC996F42C76C3FA00597228 /* SafeAreaReader.swift in Sources */,
