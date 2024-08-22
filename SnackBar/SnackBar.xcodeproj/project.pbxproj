@@ -15,6 +15,7 @@
 		0C8BADB22C747CE6006478C4 /* DispatchQueue+Exntension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */; };
 		0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB82C747D55006478C4 /* View+Extension.swift */; };
 		0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */; };
+		0CC996F42C76C3FA00597228 /* SafeAreaModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F32C76C3FA00597228 /* SafeAreaModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		0C8BADB12C747CE6006478C4 /* DispatchQueue+Exntension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Exntension.swift"; sourceTree = "<group>"; };
 		0C8BADB82C747D55006478C4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerModifier.swift; sourceTree = "<group>"; };
+		0CC996F32C76C3FA00597228 /* SafeAreaModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				0C8BADB82C747D55006478C4 /* View+Extension.swift */,
+				0CC996F32C76C3FA00597228 /* SafeAreaModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */,
 				0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */,
 				0C8BADAF2C747C1A006478C4 /* SnackBarModifier.swift in Sources */,
+				0CC996F42C76C3FA00597228 /* SafeAreaModifier.swift in Sources */,
 				0C8BADB22C747CE6006478C4 /* DispatchQueue+Exntension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

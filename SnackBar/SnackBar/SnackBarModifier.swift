@@ -80,7 +80,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .readFrame(for: $presenterFrame)
-            .safeAreaGetter($safeAreaInsets)
+            .readSafeArea($safeAreaInsets)
             .overlay(
                 Group {
                     if showContent, presenterFrame != .zero {
@@ -149,31 +149,5 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
 extension CGPoint {
     static var pointFarAwayFromScreen: CGPoint {
         CGPoint(x: UIScreen.main.bounds.width * 2, y: UIScreen.main.bounds.height * 2)
-    }
-}
-
-extension View {
-    public func safeAreaGetter(_ safeArea: Binding<EdgeInsets>) -> some View {
-        modifier(SafeAreaGetter(safeArea: safeArea))
-    }
-}
-
-struct SafeAreaGetter: ViewModifier {
-
-    @Binding var safeArea: EdgeInsets
-
-    func body(content: Content) -> some View {
-        content
-            .background(
-                GeometryReader { proxy -> AnyView in
-                    DispatchQueue.main.async {
-                        let area = proxy.safeAreaInsets
-                        if area != self.safeArea {
-                            self.safeArea = area
-                        }
-                    }
-                    return AnyView(EmptyView())
-                }
-            )
     }
 }
