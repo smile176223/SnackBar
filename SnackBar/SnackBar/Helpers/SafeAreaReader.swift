@@ -9,11 +9,11 @@ import SwiftUI
 
 extension View {
     func readSafeArea(_ safeArea: Binding<EdgeInsets>) -> some View {
-        modifier(SafeAreaModifier(safeArea: safeArea))
+        modifier(SafeAreaReader(safeArea: safeArea))
     }
 }
 
-struct SafeAreaModifier: ViewModifier {
+struct SafeAreaReader: ViewModifier {
 
     @Binding var safeArea: EdgeInsets
 
@@ -24,8 +24,8 @@ struct SafeAreaModifier: ViewModifier {
                     DispatchQueue.main.async {
                         let area = proxy.safeAreaInsets
                         
-                        if area != self.safeArea {
-                            self.safeArea = area
+                        if area != safeArea {
+                            safeArea = area
                         }
                     }
                     
