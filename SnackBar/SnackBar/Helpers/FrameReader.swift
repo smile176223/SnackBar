@@ -9,11 +9,11 @@ import SwiftUI
 
 extension View {
     func readFrame(_ frame: Binding<CGRect>) -> some View {
-        modifier(FrameModifier(frame: frame))
+        modifier(FrameReader(frame: frame))
     }
 }
 
-struct FrameModifier: ViewModifier {
+struct FrameReader: ViewModifier {
 
     @Binding var frame: CGRect
 
