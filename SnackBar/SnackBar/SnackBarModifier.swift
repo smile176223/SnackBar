@@ -22,6 +22,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     var shouldShowContent: Bool
     private var useSafeAreaInset: Bool = true
     private var verticalPadding: CGFloat = 10
+    private let screenSize: CGSize
     @State private var contentFrame: CGRect = .zero
     @State private var presenterFrame: CGRect = .zero
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
@@ -32,25 +33,15 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         animationCompletedCallback: @escaping () -> (),
         positionIsCalculatedCallback: @escaping () -> (),
         showContent: Bool,
-        shouldShowContent: Bool
+        shouldShowContent: Bool,
+        screenSize: CGSize = UIApplication.screenSize
     ) {
         self.contentView = contentView
         self.animationCompletedCallback = animationCompletedCallback
         self.positionIsCalculatedCallback = positionIsCalculatedCallback
         self.showContent = showContent
         self.shouldShowContent = shouldShowContent
-    }
-    
-    private var screenSize: CGSize {
-        return UIApplication
-            .shared
-            .connectedScenes
-            .compactMap { scene -> UIWindow? in
-                (scene as? UIWindowScene)?.keyWindow
-            }
-            .first?
-            .frame
-            .size ?? .zero
+        self.screenSize = screenSize
     }
     
     private var displayOffsetY: CGFloat {
