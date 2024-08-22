@@ -70,7 +70,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     public func body(content: Content) -> some View {
         content
-            .readFrame(for: $presenterFrame)
+            .readFrame($presenterFrame)
             .readSafeArea($safeAreaInsets)
             .overlay(
                 Group {
@@ -88,8 +88,26 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                 VStack {
                     contentView()
                 }
-                .readFrame(for: $contentFrame)
+                .readFrame($contentFrame)
                 .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
+//                .onAppear {
+//                    if currentOffset == CGPoint.outOfScreenPoint {
+//                        DispatchQueue.main.async {
+//                            currentOffset = hiddenOffset
+//                        }
+//                    }
+//                    
+//                    DispatchQueue.main.async {
+//                        withAnimation(.spring()) {
+//                            changeParamsWithAnimation(true)
+//                        } completion: {
+//                            animationCompletedCallback()
+//                        }
+//                    }
+//                    
+//                    positionIsCalculatedCallback()
+//                    
+//                }
                 .onChange(of: shouldShowContent) { newValue in
                     if currentOffset == CGPoint.outOfScreenPoint {
                         DispatchQueue.main.async {
@@ -105,7 +123,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                         }
                     }
                 }
-                .onChange(of: contentFrame.size) { _ in
+                .onChange(of: contentFrame.size) { value in
                     positionIsCalculatedCallback()
                 }
             }
@@ -114,7 +132,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                 VStack {
                     contentView()
                 }
-                .readFrame(for: $contentFrame)
+                .readFrame($contentFrame)
                 .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
                 .onChange(of: targetCurrentOffset) { newValue in
                     if !shouldShowContent, newValue == hiddenOffset {
@@ -128,6 +146,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                 .onChange(of: contentFrame.size) { _ in
                     positionIsCalculatedCallback()
                 }
+                .onAppear(perform: positionIsCalculatedCallback)
             }
         }
     }

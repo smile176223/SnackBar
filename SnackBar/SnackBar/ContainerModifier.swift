@@ -52,11 +52,11 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
                 appearAction(newValue)
             }
         }
-        .onAppear {
-            if isPresented {
-                appearAction(true)
-            }
-        }
+//        .onAppear {
+//            if isPresented {
+//                appearAction(true)
+//            }
+//        }
     }
     
     private func snackBarModifier() -> SnackBarModifier<ContentView> {
