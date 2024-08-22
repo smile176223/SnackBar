@@ -94,6 +94,12 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             dispatchWorkHolder.work?.cancel()
             shouldShowContent = false
         }
+        
+        if #unavailable(iOS 17.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                onAnimationCompleted()
+            }
+        }
     }
     
     private func onAnimationCompleted() -> () {
