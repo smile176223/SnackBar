@@ -19,6 +19,7 @@
 		0CC996F62C76C88B00597228 /* FrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F52C76C88B00597228 /* FrameModifier.swift */; };
 		0CC996F82C76C92F00597228 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */; };
 		0CC996FA2C76CC2900597228 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */; };
+		0CC996FC2C77129A00597228 /* ClassReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996FB2C77129A00597228 /* ClassReference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		0CC996F52C76C88B00597228 /* FrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameModifier.swift; sourceTree = "<group>"; };
 		0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		0CC996FB2C77129A00597228 /* ClassReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassReference.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				0CC996F52C76C88B00597228 /* FrameModifier.swift */,
 				0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */,
 				0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */,
+				0CC996FB2C77129A00597228 /* ClassReference.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				0C8BADAF2C747C1A006478C4 /* SnackBarModifier.swift in Sources */,
 				0CC996F42C76C3FA00597228 /* SafeAreaReader.swift in Sources */,
 				0CC996F82C76C92F00597228 /* CGPoint+Extension.swift in Sources */,
+				0CC996FC2C77129A00597228 /* ClassReference.swift in Sources */,
 				0C8BADB22C747CE6006478C4 /* DispatchQueue+Exntension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
