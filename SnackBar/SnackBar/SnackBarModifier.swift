@@ -25,7 +25,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     @State private var contentFrame: CGRect = .zero
     @State private var presenterFrame: CGRect = .zero
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
-    @State private var actualCurrentOffset = CGPoint.pointFarAwayFromScreen
+    @State private var actualCurrentOffset = CGPoint.outOfScreenPoint
     
     public init(
         contentView: @escaping () -> ContentView,
@@ -71,7 +71,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     private var hiddenOffset: CGPoint {
         if contentFrame.isEmpty {
-            return CGPoint.pointFarAwayFromScreen
+            return CGPoint.outOfScreenPoint
         }
 
         return CGPoint(x: displayOffsetX, y: screenSize.height)
@@ -100,7 +100,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                 .readFrame(for: $contentFrame)
                 .position(x: contentFrame.width / 2 + actualCurrentOffset.x, y: contentFrame.height / 2 + actualCurrentOffset.y)
                 .onChange(of: shouldShowContent) { newValue in
-                    if actualCurrentOffset == CGPoint.pointFarAwayFromScreen {
+                    if actualCurrentOffset == CGPoint.outOfScreenPoint {
                         DispatchQueue.main.async {
                             actualCurrentOffset = hiddenOffset
                         }
@@ -143,11 +143,5 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     func changeParamsWithAnimation(_ isDisplayAnimation: Bool) {
         self.actualCurrentOffset = isDisplayAnimation ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
-    }
-}
-
-extension CGPoint {
-    static var pointFarAwayFromScreen: CGPoint {
-        CGPoint(x: UIScreen.main.bounds.width * 2, y: UIScreen.main.bounds.height * 2)
     }
 }
