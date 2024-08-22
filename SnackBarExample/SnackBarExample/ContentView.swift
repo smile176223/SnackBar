@@ -6,16 +6,39 @@
 //
 
 import SwiftUI
+import SnackBar
 
 struct ContentView: View {
+    
+    @State private var isPresented: Bool = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Button {
+                isPresented.toggle()
+            } label: {
+                Text("SHOW")
+                    .bold()
+            }
         }
-        .padding()
+        .snackBar($isPresented) {
+            ZStack {
+                HStack {
+                    Image(systemName: "network")
+                        .foregroundColor(.white)
+                    
+                    Text("No internet connect...")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                }
+                .padding(16)
+            }
+            .frame(width: UIScreen.main.bounds.width - 32)
+            .background(Color.black.opacity(0.7))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
     }
 }
 
