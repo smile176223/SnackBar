@@ -7,36 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C73731D2C787C310099E702 /* SnackBar in Frameworks */ = {isa = PBXBuildFile; productRef = 0C73731C2C787C310099E702 /* SnackBar */; };
 		0CC996E02C76B9E800597228 /* SnackBarExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996DF2C76B9E800597228 /* SnackBarExampleApp.swift */; };
 		0CC996E22C76B9E800597228 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996E12C76B9E800597228 /* ContentView.swift */; };
 		0CC996E42C76B9EA00597228 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CC996E32C76B9EA00597228 /* Assets.xcassets */; };
 		0CC996E82C76B9EA00597228 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CC996E72C76B9EA00597228 /* Preview Assets.xcassets */; };
-		0CC996F02C76BB5200597228 /* SnackBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC996EF2C76BB5200597228 /* SnackBar.framework */; };
-		0CC996F12C76BB5200597228 /* SnackBar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC996EF2C76BB5200597228 /* SnackBar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		0CC996F22C76BB5200597228 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				0CC996F12C76BB5200597228 /* SnackBar.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		0C73731A2C787C1F0099E702 /* SnackBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SnackBar; path = ..; sourceTree = "<group>"; };
 		0CC996DC2C76B9E800597228 /* SnackBarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnackBarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CC996DF2C76B9E800597228 /* SnackBarExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarExampleApp.swift; sourceTree = "<group>"; };
 		0CC996E12C76B9E800597228 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0CC996E32C76B9EA00597228 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CC996E52C76B9EA00597228 /* SnackBarExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnackBarExample.entitlements; sourceTree = "<group>"; };
 		0CC996E72C76B9EA00597228 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0CC996EF2C76BB5200597228 /* SnackBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnackBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,19 +29,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CC996F02C76BB5200597228 /* SnackBar.framework in Frameworks */,
+				0C73731D2C787C310099E702 /* SnackBar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C73731B2C787C310099E702 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0CC996D32C76B9E800597228 = {
 			isa = PBXGroup;
 			children = (
+				0C73731A2C787C1F0099E702 /* SnackBar */,
 				0CC996DE2C76B9E800597228 /* SnackBarExample */,
 				0CC996DD2C76B9E800597228 /* Products */,
-				0CC996EE2C76BB5100597228 /* Frameworks */,
+				0C73731B2C787C310099E702 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,14 +81,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		0CC996EE2C76BB5100597228 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0CC996EF2C76BB5200597228 /* SnackBar.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,13 +91,15 @@
 				0CC996D82C76B9E800597228 /* Sources */,
 				0CC996D92C76B9E800597228 /* Frameworks */,
 				0CC996DA2C76B9E800597228 /* Resources */,
-				0CC996F22C76BB5200597228 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SnackBarExample;
+			packageProductDependencies = (
+				0C73731C2C787C310099E702 /* SnackBar */,
+			);
 			productName = SnackBarExample;
 			productReference = 0CC996DC2C76B9E800597228 /* SnackBarExample.app */;
 			productType = "com.apple.product-type.application";
@@ -391,6 +378,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0C73731C2C787C310099E702 /* SnackBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SnackBar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0CC996D42C76B9E800597228 /* Project object */;
 }
