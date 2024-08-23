@@ -9,15 +9,15 @@ import SwiftUI
 
 public struct ContainerModifier<ContentView: View>: ViewModifier {
     
-    @Binding var isPresented: Bool
-    var contentView: () -> ContentView
+    @Binding private var isPresented: Bool
+    private var contentView: () -> ContentView
+    private var onWillDismiss: () -> ()
+    private var onDismiss: () -> ()
+    private let parameters: SnackBarParameters
     
     @State private var shouldShowContent = false
     @State private var isSnackBarVisible = false
     @State private var isClosingInProgress = false
-    
-    var onWillDismiss: () -> ()
-    var onDismiss: () -> ()
     
     private let snackBarQueue = DispatchQueue(label: "snackBarQueue", qos: .utility)
     private var snackBarSemaphore = DispatchSemaphore(value: 1)
@@ -27,12 +27,14 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
         isPresented: Binding<Bool>,
         contentView: @escaping () -> ContentView,
         onWillDismiss: @escaping () -> (),
-        onDismiss: @escaping () -> ()
+        onDismiss: @escaping () -> (),
+        parameters: SnackBarParameters
     ) {
         _isPresented = isPresented
         self.contentView = contentView
         self.onDismiss = onDismiss
         self.onWillDismiss = onWillDismiss
+        self.parameters = parameters
     }
     
     public func body(content: Content) -> some View {
@@ -52,6 +54,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             contentView: contentView,
             onAnimationComplete: handleAnimationComplete,
             onPositionChanged: handlePositionChange,
+            parameters: parameters,
             isVisible: isSnackBarVisible,
             shouldShowContent: shouldShowContent
         )

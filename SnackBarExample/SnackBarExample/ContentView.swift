@@ -21,7 +21,7 @@ struct ContentView: View {
                     .bold()
             }
         }
-        .snackBar($isPresented) {
+        .snackBar($isPresented, view: {
             ZStack {
                 HStack {
                     Image(systemName: "network")
@@ -38,7 +38,7 @@ struct ContentView: View {
             .frame(width: UIScreen.main.bounds.width - 32)
             .background(Color.black.opacity(0.7))
             .clipShape(RoundedRectangle(cornerRadius: 12))
-        }
+        })
     }
 }
 

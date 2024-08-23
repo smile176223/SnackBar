@@ -17,9 +17,9 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     private var contentView: () -> ContentView
     private var onAnimationComplete: () -> ()
     private var onPositionChanged: (CGSize) -> ()
+    private var parameters: SnackBarParameters
     private var isVisible: Bool
     private var shouldShowContent: Bool
-    private var verticalPadding: CGFloat = 10
     private let screenSize: CGSize
     @State private var contentFrame: CGRect = .zero
     @State private var presenterFrame: CGRect = .zero
@@ -30,6 +30,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         contentView: @escaping () -> ContentView,
         onAnimationComplete: @escaping () -> (),
         onPositionChanged: @escaping (CGSize) -> (),
+        parameters: SnackBarParameters,
         isVisible: Bool,
         shouldShowContent: Bool,
         screenSize: CGSize = UIApplication.screenSize
@@ -37,6 +38,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         self.contentView = contentView
         self.onAnimationComplete = onAnimationComplete
         self.onPositionChanged = onPositionChanged
+        self.parameters = parameters
         self.isVisible = isVisible
         self.shouldShowContent = shouldShowContent
         self.screenSize = screenSize
@@ -45,7 +47,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     private var displayOffsetY: CGFloat {
         presenterFrame.height
         - contentFrame.height
-        - verticalPadding
+        - parameters.verticalPadding
     }
     
     private var displayOffsetX: CGFloat {
