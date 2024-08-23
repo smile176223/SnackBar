@@ -11,14 +11,17 @@ import SwiftUI
 public extension View {
     func snackBar<ContentView: View>(
         _ isPresented: Binding<Bool>,
-        contentView: @escaping () -> ContentView
+        contentView: @escaping () -> ContentView,
+        onWillDismiss: @escaping () -> Void = {},
+        onDismiss: @escaping () -> Void = {}
     ) -> some View {
         self.modifier(
             ContainerModifier(
                 isPresented: isPresented,
                 contentView: contentView,
-                onWillDismiss: {},
-                onDismiss: {}
+                onWillDismiss: onWillDismiss,
+                onDismiss: onDismiss
+                
             )
         )
     }
