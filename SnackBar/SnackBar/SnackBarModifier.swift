@@ -17,7 +17,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     private var contentView: () -> ContentView
     private var onAnimationComplete: () -> ()
     private var onPositionChanged: (CGSize) -> ()
-    private var showContent: Bool
+    private var isVisible: Bool
     private var shouldShowContent: Bool
     private var useSafeAreaInset: Bool = true
     private var verticalPadding: CGFloat = 10
@@ -31,14 +31,14 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         contentView: @escaping () -> ContentView,
         onAnimationComplete: @escaping () -> (),
         onPositionChanged: @escaping (CGSize) -> (),
-        showContent: Bool,
+        isVisible: Bool,
         shouldShowContent: Bool,
         screenSize: CGSize = UIApplication.screenSize
     ) {
         self.contentView = contentView
         self.onAnimationComplete = onAnimationComplete
         self.onPositionChanged = onPositionChanged
-        self.showContent = showContent
+        self.isVisible = isVisible
         self.shouldShowContent = shouldShowContent
         self.screenSize = screenSize
     }
@@ -69,7 +69,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             .readSafeArea($safeAreaInsets)
             .overlay(
                 Group {
-                    if showContent, presenterFrame != .zero {
+                    if isVisible, presenterFrame != .zero {
                         snackBar()
                     }
                 }
