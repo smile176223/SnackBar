@@ -45,9 +45,12 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     }
     
     private var displayOffsetY: CGFloat {
-        presenterFrame.height
-        - contentFrame.height
-        - parameters.padding
+        switch parameters.position {
+        case .top:
+            return parameters.padding
+        case .bottom:
+            return presenterFrame.height - contentFrame.height - parameters.padding
+        }
     }
     
     private var displayOffsetX: CGFloat {
@@ -59,7 +62,12 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             return CGPoint.outOfScreenPoint
         }
         
-        return CGPoint(x: displayOffsetX, y: screenSize.height)
+        switch parameters.position {
+        case .top:
+            return CGPoint(x: displayOffsetX, y: -presenterFrame.minY - safeAreaInsets.top - contentFrame.height)
+        case .bottom:
+            return CGPoint(x: displayOffsetX, y: screenSize.height)
+        }
     }
     
     public func body(content: Content) -> some View {
