@@ -22,4 +22,7 @@ A SwiftUI library designed to display a snack bar.
 
 ### Swift Package Manager (SPM)
 
-// TODO
+```swift
+dependencies: [
+    .package(url: "https://github.com/smile176223/SnackBar.git")
+]
