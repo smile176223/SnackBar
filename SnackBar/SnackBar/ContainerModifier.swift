@@ -52,7 +52,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             contentView: contentView,
             onAnimationComplete: handleAnimationComplete,
             onPositionChanged: handlePositionChange,
-            showContent: isSnackBarVisible,
+            isVisible: isSnackBarVisible,
             shouldShowContent: shouldShowContent
         )
     }
