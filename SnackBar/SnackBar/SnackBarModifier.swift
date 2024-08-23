@@ -105,7 +105,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         
         if #available(iOS 17.0, *) {
             DispatchQueue.main.async {
-                withAnimation(.spring()) {
+                withAnimation(parameters.animation) {
                     moveOffset(value)
                 } completion: {
                     onAnimationComplete()
@@ -113,7 +113,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             }
         } else {
             DispatchQueue.main.async {
-                withAnimation(.spring()) {
+                withAnimation(parameters.animation) {
                     moveOffset(value)
                 }
             }
