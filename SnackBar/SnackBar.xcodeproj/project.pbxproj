@@ -19,6 +19,7 @@
 		0CC996F82C76C92F00597228 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */; };
 		0CC996FA2C76CC2900597228 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */; };
 		0CC996FE2C781C3300597228 /* DispatchWorkItemHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996FD2C781C3300597228 /* DispatchWorkItemHolder.swift */; };
+		0CC997002C78411D00597228 /* SnackBarParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996FF2C78411D00597228 /* SnackBarParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		0CC996F72C76C92F00597228 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		0CC996F92C76CC2900597228 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		0CC996FD2C781C3300597228 /* DispatchWorkItemHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchWorkItemHolder.swift; sourceTree = "<group>"; };
+		0CC996FF2C78411D00597228 /* SnackBarParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */,
 				0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */,
 				0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */,
+				0CC996FF2C78411D00597228 /* SnackBarParameters.swift */,
 			);
 			path = SnackBar;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CC997002C78411D00597228 /* SnackBarParameters.swift in Sources */,
 				0C74D9AA2C6F374F00DFC854 /* SnackBarView.swift in Sources */,
 				0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */,
 				0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */,
