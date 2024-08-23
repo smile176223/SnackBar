@@ -19,7 +19,6 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     private var onPositionChanged: (CGSize) -> ()
     private var isVisible: Bool
     private var shouldShowContent: Bool
-    private var useSafeAreaInset: Bool = true
     private var verticalPadding: CGFloat = 10
     private let screenSize: CGSize
     @State private var contentFrame: CGRect = .zero
@@ -47,8 +46,6 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         presenterFrame.height
         - contentFrame.height
         - verticalPadding
-        + safeAreaInsets.bottom
-        - (useSafeAreaInset ? safeAreaInsets.bottom : 0)
     }
     
     private var displayOffsetX: CGFloat {
