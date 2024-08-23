@@ -10,7 +10,6 @@
 		0C74D99A2C6F36F500DFC854 /* SnackBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C74D9912C6F36F500DFC854 /* SnackBar.framework */; };
 		0C74D99F2C6F36F500DFC854 /* SnackBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C74D99E2C6F36F500DFC854 /* SnackBarTests.swift */; };
 		0C74D9A02C6F36F500DFC854 /* SnackBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C74D9942C6F36F500DFC854 /* SnackBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C74D9AA2C6F374F00DFC854 /* SnackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */; };
 		0C8BADAF2C747C1A006478C4 /* SnackBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */; };
 		0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADB82C747D55006478C4 /* View+Extension.swift */; };
 		0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */; };
@@ -37,7 +36,6 @@
 		0C74D9942C6F36F500DFC854 /* SnackBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SnackBar.h; sourceTree = "<group>"; };
 		0C74D9992C6F36F500DFC854 /* SnackBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnackBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C74D99E2C6F36F500DFC854 /* SnackBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarTests.swift; sourceTree = "<group>"; };
-		0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarView.swift; sourceTree = "<group>"; };
 		0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarModifier.swift; sourceTree = "<group>"; };
 		0C8BADB82C747D55006478C4 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerModifier.swift; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 			children = (
 				0C8BADB72C747D48006478C4 /* Helpers */,
 				0C74D9942C6F36F500DFC854 /* SnackBar.h */,
-				0C74D9A92C6F374F00DFC854 /* SnackBarView.swift */,
 				0C8BADAE2C747C1A006478C4 /* SnackBarModifier.swift */,
 				0C8BADBA2C748F1A006478C4 /* ContainerModifier.swift */,
 				0CC996FF2C78411D00597228 /* SnackBarParameters.swift */,
@@ -231,7 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CC997002C78411D00597228 /* SnackBarParameters.swift in Sources */,
-				0C74D9AA2C6F374F00DFC854 /* SnackBarView.swift in Sources */,
 				0C8BADBB2C748F1A006478C4 /* ContainerModifier.swift in Sources */,
 				0C8BADB92C747D55006478C4 /* View+Extension.swift in Sources */,
 				0CC996F62C76C88B00597228 /* FrameReader.swift in Sources */,
