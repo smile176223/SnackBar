@@ -47,7 +47,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     private var displayOffsetY: CGFloat {
         presenterFrame.height
         - contentFrame.height
-        - parameters.verticalPadding
+        - parameters.padding
     }
     
     private var displayOffsetX: CGFloat {

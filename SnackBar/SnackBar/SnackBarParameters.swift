@@ -15,15 +15,15 @@ public struct SnackBarParameters {
     }
     
     public var position: Position = .bottom
-    public var verticalPadding: CGFloat = 10
+    public var padding: CGFloat = 10
     
     
     public func position(_ position: Position) -> SnackBarParameters {
         updateParameters { $0.position = position }
     }
     
-    public func verticalPadding(_ verticalPadding: CGFloat) -> SnackBarParameters {
-        updateParameters { $0.verticalPadding = verticalPadding }
+    public func padding(_ padding: CGFloat) -> SnackBarParameters {
+        updateParameters { $0.padding = padding }
     }
     
     private func updateParameters(_ update: (inout SnackBarParameters) -> Void) -> SnackBarParameters {
