@@ -13,15 +13,15 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     var contentView: () -> ContentView
     
     @State private var shouldShowContent = false
-    @State private var showContent: Bool = false
-    @State private var closingIsInProcess = false
+    @State private var isSnackBarVisible = false
+    @State private var isClosingInProgress = false
+    
     var onWillDismiss: () -> ()
     var onDismiss: () -> ()
     
     private let snackBarQueue = DispatchQueue(label: "snackBarQueue", qos: .utility)
-    @State private var snackBarSemaphore = DispatchSemaphore(value: 1)
-    @State private var debouncedWorkItem = DispatchWorkItemHolder()
-    private var isPresentedRef: ClassReference<Binding<Bool>>?
+    private var snackBarSemaphore = DispatchSemaphore(value: 1)
+    private var debouncedWorkItem = DispatchWorkItemHolder()
     
     public init(
         isPresented: Binding<Bool>,
@@ -33,75 +33,81 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
         self.contentView = contentView
         self.onDismiss = onDismiss
         self.onWillDismiss = onWillDismiss
-        self.isPresentedRef = ClassReference(isPresented)
     }
     
     public func body(content: Content) -> some View {
         ZStack {
             content
             
-            if showContent {
+            if isSnackBarVisible {
                 Color.clear
                     .modifier(snackBarModifier())
             }
         }
-        .onChange(of: isPresented) { newValue in
-            snackBarQueue.async {
-                snackBarSemaphore.wait()
-                closingIsInProcess = !newValue
-                appearAction(newValue)
-            }
-        }
-        .onAppear {
-            if isPresented {
-                appearAction(true)
-            }
-        }
+        .onChange(of: isPresented, perform: handlePresentationChange)
     }
     
     private func snackBarModifier() -> SnackBarModifier<ContentView> {
         SnackBarModifier(
             contentView: contentView,
-            onAnimationComplete: onAnimationCompleted,
-            onPositionChanged: { _ in
-                if !closingIsInProcess {
-                    DispatchQueue.main.async {
-                        shouldShowContent = true
-                    }
-                    
-                    debouncedWorkItem.work?.cancel()
-
-                    debouncedWorkItem.work = DispatchWorkItem(block: { [weak isPresentedRef] in
-                        isPresentedRef?.value.wrappedValue = false
-                        debouncedWorkItem.work = nil
-                    })
-                    if isPresented, let work = debouncedWorkItem.work {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: work)
-                    }
-                }
-            },
-            showContent: showContent,
+            onAnimationComplete: handleAnimationComplete,
+            onPositionChanged: handlePositionChange,
+            showContent: isSnackBarVisible,
             shouldShowContent: shouldShowContent
         )
     }
     
-    private func appearAction(_ isPresented: Bool) {
-        if isPresented {
-            showContent = true
-        } else {
-            closingIsInProcess = true
-            onWillDismiss()
-            debouncedWorkItem.work?.cancel()
-            shouldShowContent = false
+    private func handlePresentationChange(_ isPresented: Bool) {
+        snackBarQueue.async {
+            snackBarSemaphore.wait()
+            
+            isClosingInProgress = !isPresented
+            
+            if isPresented {
+                presentSnackBar()
+            } else {
+                dismissSnackBar()
+            }
         }
     }
     
-    private func onAnimationCompleted() -> () {
+    private func presentSnackBar() {
+        isSnackBarVisible = true
+    }
+    
+    private func dismissSnackBar() {
+        isClosingInProgress = true
+        onWillDismiss()
+        cancelWorkItem()
+        shouldShowContent = false
+    }
+    
+    private func cancelWorkItem() {
+        debouncedWorkItem.work?.cancel()
+    }
+    
+    private func handlePositionChange(_ size: CGSize) {
+        if !isClosingInProgress {
+            shouldShowContent = true
+            
+            debouncedWorkItem.work?.cancel()
+
+            debouncedWorkItem.work = DispatchWorkItem(block: {
+                isPresented = false
+                debouncedWorkItem.work = nil
+            })
+            if isPresented, let work = debouncedWorkItem.work {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: work)
+            }
+        }
+    }
+    
+    private func handleAnimationComplete() {
         if shouldShowContent {
             snackBarSemaphore.signal()
             return
         }
-        showContent = false
+        isSnackBarVisible = false
         onDismiss()
         snackBarSemaphore.signal()
     }
