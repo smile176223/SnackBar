@@ -16,7 +16,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     private var contentView: () -> ContentView
     private var onAnimationComplete: () -> ()
-    private var onPositionChanged: () -> ()
+    private var onPositionChanged: (CGSize) -> ()
     private var showContent: Bool
     private var shouldShowContent: Bool
     private var useSafeAreaInset: Bool = true
@@ -30,7 +30,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     public init(
         contentView: @escaping () -> ContentView,
         onAnimationComplete: @escaping () -> (),
-        onPositionChanged: @escaping () -> (),
+        onPositionChanged: @escaping (CGSize) -> (),
         showContent: Bool,
         shouldShowContent: Bool,
         screenSize: CGSize = UIApplication.screenSize
@@ -85,7 +85,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             .readFrame($contentFrame)
             .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
             .onChange(of: shouldShowContent, perform: moveWithAnimation)
-            .onChange(of: contentFrame.size) { _ in onPositionChanged() }
+            .onChange(of: contentFrame.size, perform: onPositionChanged)
         }
     }
     

@@ -63,7 +63,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
         SnackBarModifier(
             contentView: contentView,
             onAnimationComplete: onAnimationCompleted,
-            onPositionChanged: {
+            onPositionChanged: { _ in
                 if !closingIsInProcess {
                     DispatchQueue.main.async {
                         shouldShowContent = true
