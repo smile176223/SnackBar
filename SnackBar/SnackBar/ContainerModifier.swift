@@ -15,24 +15,24 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     @State private var shouldShowContent = false
     @State private var showContent: Bool = false
     @State private var closingIsInProcess = false
-    var userWillDismissCallback: () -> ()
-    var userDismissCallback: () -> ()
+    var onWillDismiss: () -> ()
+    var onDismiss: () -> ()
     
     private let snackBarQueue = DispatchQueue(label: "snackBarQueue", qos: .utility)
     @State private var snackBarSemaphore = DispatchSemaphore(value: 1)
-    @State private var dispatchWorkHolder = DispatchWorkHolder()
+    @State private var debouncedWorkItem = DispatchWorkItemHolder()
     private var isPresentedRef: ClassReference<Binding<Bool>>?
     
     public init(
         isPresented: Binding<Bool>,
         contentView: @escaping () -> ContentView,
-        userWillDismissCallback: @escaping () -> (),
-        userDismissCallback: @escaping () -> ()
+        onWillDismiss: @escaping () -> (),
+        onDismiss: @escaping () -> ()
     ) {
         _isPresented = isPresented
         self.contentView = contentView
-        self.userDismissCallback = userDismissCallback
-        self.userWillDismissCallback = userWillDismissCallback
+        self.onDismiss = onDismiss
+        self.onWillDismiss = onWillDismiss
         self.isPresentedRef = ClassReference(isPresented)
     }
     
@@ -69,13 +69,13 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
                         shouldShowContent = true
                     }
                     
-                    dispatchWorkHolder.work?.cancel()
+                    debouncedWorkItem.work?.cancel()
 
-                    dispatchWorkHolder.work = DispatchWorkItem(block: { [weak isPresentedRef] in
+                    debouncedWorkItem.work = DispatchWorkItem(block: { [weak isPresentedRef] in
                         isPresentedRef?.value.wrappedValue = false
-                        dispatchWorkHolder.work = nil
+                        debouncedWorkItem.work = nil
                     })
-                    if isPresented, let work = dispatchWorkHolder.work {
+                    if isPresented, let work = debouncedWorkItem.work {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: work)
                     }
                 }
@@ -90,8 +90,8 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             showContent = true
         } else {
             closingIsInProcess = true
-            userWillDismissCallback()
-            dispatchWorkHolder.work?.cancel()
+            onWillDismiss()
+            debouncedWorkItem.work?.cancel()
             shouldShowContent = false
         }
     }
@@ -102,11 +102,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             return
         }
         showContent = false
-        userDismissCallback()
+        onDismiss()
         snackBarSemaphore.signal()
     }
-}
-
-final class DispatchWorkHolder {
-    var work: DispatchWorkItem?
 }

@@ -17,8 +17,8 @@ public extension View {
             ContainerModifier(
                 isPresented: isPresented,
                 contentView: contentView,
-                userWillDismissCallback: {},
-                userDismissCallback: {}
+                onWillDismiss: {},
+                onDismiss: {}
             )
         )
     }
