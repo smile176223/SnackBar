@@ -9,7 +9,7 @@ A SwiftUI library designed to display a snack bar.
 ## Features
 
 - [x] Display `SnackBar`
-- [ ] Customizable design
+- [X] Customizable design
 - [ ] Handle Tap events
 - [ ] Handle keyboard events
 - [ ] Handle orientation changes
