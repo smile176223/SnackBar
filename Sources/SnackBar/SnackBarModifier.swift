@@ -8,15 +8,12 @@
 import Foundation
 import SwiftUI
 
-// TODO: 1. Keyboard
-// TODO: 2. Orientation
-// TODO: 3. Tap to dismiss
-
 public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     private var contentView: () -> ContentView
     private var onAnimationComplete: () -> ()
-    private var onPositionChanged: (CGSize) -> ()
+    private var onAppear: () -> ()
+    private var onTap: () -> ()
     private var parameters: SnackBarParameters
     private var isVisible: Bool
     private var shouldShowContent: Bool
@@ -26,10 +23,13 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
     @State private var currentOffset = CGPoint.outOfScreenPoint
     
+    @State private var isLandscape: Bool = UIDevice.current.orientation.isLandscape
+    
     public init(
         contentView: @escaping () -> ContentView,
         onAnimationComplete: @escaping () -> (),
-        onPositionChanged: @escaping (CGSize) -> (),
+        onAppear: @escaping () -> (),
+        onTap: @escaping () -> (),
         parameters: SnackBarParameters,
         isVisible: Bool,
         shouldShowContent: Bool,
@@ -37,7 +37,8 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     ) {
         self.contentView = contentView
         self.onAnimationComplete = onAnimationComplete
-        self.onPositionChanged = onPositionChanged
+        self.onAppear = onAppear
+        self.onTap = onTap
         self.parameters = parameters
         self.isVisible = isVisible
         self.shouldShowContent = shouldShowContent
@@ -64,10 +65,23 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         
         switch parameters.position {
         case .top:
-            return CGPoint(x: displayOffsetX, y: -presenterFrame.minY - safeAreaInsets.top - contentFrame.height)
+            return CGPoint(
+                x: displayOffsetX,
+                y: -presenterFrame.minY - safeAreaInsets.top - contentFrame.height
+            )
         case .bottom:
-            return CGPoint(x: displayOffsetX, y: screenSize.height)
+            return CGPoint(
+                x: displayOffsetX,
+                y: screenSize.height
+            )
         }
+    }
+    
+    private var snackBarPosition: CGPoint {
+        CGPoint(
+            x: contentFrame.width / 2 + currentOffset.x,
+            y: contentFrame.height / 2 + currentOffset.y
+        )
     }
     
     public func body(content: Content) -> some View {
@@ -88,11 +102,13 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         ZStack {
             VStack {
                 contentView()
+                    .addTapGesture(onTap: onTap)
             }
             .readFrame($contentFrame)
-            .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
+            .position(snackBarPosition)
             .onChange(of: shouldShowContent, perform: moveWithAnimation)
-            .onChange(of: contentFrame.size, perform: onPositionChanged)
+            .onAppear(perform: onAppear)
+            .onRotate(perform: handleRotate)
         }
     }
     
@@ -124,7 +140,13 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         }
     }
     
+    private func handleRotate() {
+        DispatchQueue.main.async {
+            moveOffset(true)
+        }
+    }
+    
     private func moveOffset(_ value: Bool) {
-        currentOffset = value ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
+        currentOffset = value ? CGPoint(x: displayOffsetX, y: displayOffsetY) : hiddenOffset
     }
 }
