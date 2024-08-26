@@ -21,7 +21,7 @@ struct ContentView: View {
                     .bold()
             }
         }
-        .snackBar($isPresented, view: {
+        .snackBar($isPresented, content: {
             ZStack {
                 HStack {
                     Image(systemName: "network")
