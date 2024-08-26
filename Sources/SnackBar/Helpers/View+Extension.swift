@@ -12,9 +12,9 @@ public extension View {
     func snackBar<ContentView: View>(
         _ isPresented: Binding<Bool>,
         view: @escaping () -> ContentView,
+        configure: @escaping (SnackBarParameters) -> SnackBarParameters = { $0 },
         onWillDismiss: @escaping () -> Void = {},
-        onDismiss: @escaping () -> Void = {},
-        configure: @escaping (SnackBarParameters) -> SnackBarParameters = { $0 }
+        onDismiss: @escaping () -> Void = {}
     ) -> some View {
         return self.modifier(
             ContainerModifier(
