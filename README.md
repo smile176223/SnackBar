@@ -35,7 +35,7 @@ Strcut YourView: View {
 
     var body: some View {
         View()
-            .snackBar($isPresented, view: {
+            .snackBar($isPresented, content: {
                 // Custom Content View
                 ContentView()
             }, configure: {
