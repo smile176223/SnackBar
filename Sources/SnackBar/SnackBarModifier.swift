@@ -23,8 +23,6 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
     @State private var currentOffset = CGPoint.outOfScreenPoint
     
-    @State private var isLandscape: Bool = UIDevice.current.orientation.isLandscape
-    
     public init(
         contentView: @escaping () -> ContentView,
         onAnimationComplete: @escaping () -> (),
