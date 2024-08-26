@@ -13,14 +13,12 @@ public extension View {
         _ isPresented: Binding<Bool>,
         view: @escaping () -> ContentView,
         configure: @escaping (SnackBarParameters) -> SnackBarParameters = { $0 },
-        onWillDismiss: @escaping () -> Void = {},
         onDismiss: @escaping () -> Void = {}
     ) -> some View {
         return self.modifier(
             ContainerModifier(
                 isPresented: isPresented,
                 contentView: view,
-                onWillDismiss: onWillDismiss,
                 onDismiss: onDismiss,
                 parameters: configure(SnackBarParameters())
             )

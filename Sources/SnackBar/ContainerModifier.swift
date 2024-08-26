@@ -11,7 +11,6 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     
     @Binding private var isPresented: Bool
     private var contentView: () -> ContentView
-    private var onWillDismiss: () -> ()
     private var onDismiss: () -> ()
     private let parameters: SnackBarParameters
     
@@ -26,14 +25,12 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     public init(
         isPresented: Binding<Bool>,
         contentView: @escaping () -> ContentView,
-        onWillDismiss: @escaping () -> (),
         onDismiss: @escaping () -> (),
         parameters: SnackBarParameters
     ) {
         _isPresented = isPresented
         self.contentView = contentView
         self.onDismiss = onDismiss
-        self.onWillDismiss = onWillDismiss
         self.parameters = parameters
     }
     
@@ -80,7 +77,6 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     
     private func dismissSnackBar() {
         isClosingInProgress = true
-        onWillDismiss()
         cancelWorkItem()
         shouldShowContent = false
     }
