@@ -9,10 +9,10 @@ A SwiftUI library designed to display a snack bar.
 ## Features
 
 - [x] Display `SnackBar`
-- [ ] Customizable design
-- [ ] Handle Tap events
-- [ ] Handle keyboard events
-- [ ] Handle orientation changes
+- [X] Customizable design
+- [X] Handle tap events
+- [X] Handle device rotate events
+- [ ] Handle drag events
 
 ## Requirements
 
@@ -22,4 +22,26 @@ A SwiftUI library designed to display a snack bar.
 
 ### Swift Package Manager (SPM)
 
-// TODO
+```swift
+dependencies: [
+    .package(url: "https://github.com/smile176223/SnackBar.git")
+]
+```
+## How to use
+```swift
+Strcut YourView: View {
+
+    @State var isPresented: Bool = false
+
+    var body: some View {
+        View()
+            .snackBar($isPresented, view: {
+                // Custom Content View
+                ContentView()
+            }, configure: {
+                // Custom configure
+                $0.position(.bottom)
+            })
+    }
+}
+```
