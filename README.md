@@ -26,3 +26,22 @@ A SwiftUI library designed to display a snack bar.
 dependencies: [
     .package(url: "https://github.com/smile176223/SnackBar.git")
 ]
+```
+## How to use
+```swift
+Strcut YourView: View {
+
+    @State var isPresented: Bool = false
+
+    var body: some View {
+        View()
+            .snackBar($isPresented, view: {
+                // Custom Content View
+                ContentView()
+            }, configure: {
+                // Custom configure
+                $0.position(.bottom)
+            })
+    }
+}
+```
