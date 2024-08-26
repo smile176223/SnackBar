@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 // TODO: 1. Keyboard
-// TODO: 2. Orientation
 
 public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
@@ -25,6 +24,8 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     @State private var presenterFrame: CGRect = .zero
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
     @State private var currentOffset = CGPoint.outOfScreenPoint
+    
+    @State private var isLandscape: Bool = UIDevice.current.orientation.isLandscape
     
     public init(
         contentView: @escaping () -> ContentView,
@@ -109,6 +110,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             .position(snackBarPosition)
             .onChange(of: shouldShowContent, perform: moveWithAnimation)
             .onAppear(perform: onAppear)
+            .onRotate(perform: handleRotate)
         }
     }
     
@@ -137,6 +139,12 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 onAnimationComplete()
             }
+        }
+    }
+    
+    private func handleRotate() {
+        DispatchQueue.main.async {
+            moveOffset(true)
         }
     }
     
