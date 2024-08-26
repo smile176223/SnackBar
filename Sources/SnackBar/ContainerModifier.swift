@@ -73,12 +73,8 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     }
     
     private func dismissSnackBar() {
-        cancelWorkItem()
-        shouldShowContent = false
-    }
-    
-    private func cancelWorkItem() {
         debouncedWorkItem.work?.cancel()
+        shouldShowContent = false
     }
     
     private func handleSnackBarAppear() {
