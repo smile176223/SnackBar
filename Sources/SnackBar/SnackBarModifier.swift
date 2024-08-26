@@ -64,9 +64,15 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         
         switch parameters.position {
         case .top:
-            return CGPoint(x: displayOffsetX, y: -presenterFrame.minY - safeAreaInsets.top - contentFrame.height)
+            return CGPoint(
+                x: displayOffsetX,
+                y: -presenterFrame.minY - safeAreaInsets.top - contentFrame.height
+            )
         case .bottom:
-            return CGPoint(x: displayOffsetX, y: screenSize.height)
+            return CGPoint(
+                x: displayOffsetX,
+                y: screenSize.height
+            )
         }
     }
     
@@ -132,6 +138,6 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     }
     
     private func moveOffset(_ value: Bool) {
-        currentOffset = value ? CGPointMake(displayOffsetX, displayOffsetY) : hiddenOffset
+        currentOffset = value ? CGPoint(x: displayOffsetX, y: displayOffsetY) : hiddenOffset
     }
 }
