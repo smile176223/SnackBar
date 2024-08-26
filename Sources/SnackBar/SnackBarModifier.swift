@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 
-// TODO: 1. Keyboard
-
 public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     private var contentView: () -> ContentView
@@ -152,16 +150,3 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         currentOffset = value ? CGPoint(x: displayOffsetX, y: displayOffsetY) : hiddenOffset
     }
 }
-
-extension View {
-    
-    @ViewBuilder
-    func addTapGesture(onTap: @escaping () -> Void) -> some View {
-        self.simultaneousGesture(
-            TapGesture().onEnded {
-                onTap()
-            }
-        )
-    }
-}
-
