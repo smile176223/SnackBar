@@ -70,6 +70,13 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         }
     }
     
+    private var snackBarPosition: CGPoint {
+        CGPoint(
+            x: contentFrame.width / 2 + currentOffset.x,
+            y: contentFrame.height / 2 + currentOffset.y
+        )
+    }
+    
     public func body(content: Content) -> some View {
         content
             .readFrame($presenterFrame)
@@ -90,7 +97,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
                 contentView()
             }
             .readFrame($contentFrame)
-            .position(x: contentFrame.width / 2 + currentOffset.x, y: contentFrame.height / 2 + currentOffset.y)
+            .position(snackBarPosition)
             .onChange(of: shouldShowContent, perform: moveWithAnimation)
             .onChange(of: contentFrame.size, perform: onPositionChanged)
         }
