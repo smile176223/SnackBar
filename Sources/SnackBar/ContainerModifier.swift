@@ -49,7 +49,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
         SnackBarModifier(
             contentView: contentView,
             onAnimationComplete: handleAnimationComplete,
-            onPositionChanged: handlePositionChange,
+            onAppear: handleSnackBarAppear,
             parameters: parameters,
             isVisible: isSnackBarVisible,
             shouldShowContent: shouldShowContent
@@ -81,7 +81,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
         debouncedWorkItem.work?.cancel()
     }
     
-    private func handlePositionChange(_ size: CGSize) {
+    private func handleSnackBarAppear() {
         shouldShowContent = true
         debouncedWorkItem.work?.cancel()
         debouncedWorkItem.work = DispatchWorkItem(block: {

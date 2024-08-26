@@ -16,7 +16,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     private var contentView: () -> ContentView
     private var onAnimationComplete: () -> ()
-    private var onPositionChanged: (CGSize) -> ()
+    private var onAppear: () -> ()
     private var parameters: SnackBarParameters
     private var isVisible: Bool
     private var shouldShowContent: Bool
@@ -29,7 +29,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     public init(
         contentView: @escaping () -> ContentView,
         onAnimationComplete: @escaping () -> (),
-        onPositionChanged: @escaping (CGSize) -> (),
+        onAppear: @escaping () -> (),
         parameters: SnackBarParameters,
         isVisible: Bool,
         shouldShowContent: Bool,
@@ -37,7 +37,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     ) {
         self.contentView = contentView
         self.onAnimationComplete = onAnimationComplete
-        self.onPositionChanged = onPositionChanged
+        self.onAppear = onAppear
         self.parameters = parameters
         self.isVisible = isVisible
         self.shouldShowContent = shouldShowContent
@@ -99,7 +99,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             .readFrame($contentFrame)
             .position(snackBarPosition)
             .onChange(of: shouldShowContent, perform: moveWithAnimation)
-            .onChange(of: contentFrame.size, perform: onPositionChanged)
+            .onAppear(perform: onAppear)
         }
     }
     
