@@ -50,6 +50,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             contentView: contentView,
             onAnimationComplete: handleAnimationComplete,
             onAppear: handleSnackBarAppear,
+            onTap: handleTapEvents,
             parameters: parameters,
             isVisible: isSnackBarVisible,
             shouldShowContent: shouldShowContent
@@ -75,6 +76,10 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     private func dismissSnackBar() {
         debouncedWorkItem.work?.cancel()
         shouldShowContent = false
+    }
+    
+    private func handleTapEvents() {
+        isPresented = false
     }
     
     private func handleSnackBarAppear() {
