@@ -88,13 +88,12 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     private func handlePositionChange(_ size: CGSize) {
         if !isClosingInProgress {
             shouldShowContent = true
-            
             debouncedWorkItem.work?.cancel()
-
             debouncedWorkItem.work = DispatchWorkItem(block: {
                 isPresented = false
                 debouncedWorkItem.work = nil
             })
+            
             if isPresented, let work = debouncedWorkItem.work {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: work)
             }
@@ -102,10 +101,11 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     }
     
     private func handleAnimationComplete() {
-        if shouldShowContent {
+        guard !shouldShowContent else {
             snackBarSemaphore.signal()
             return
         }
+        
         isSnackBarVisible = false
         onDismiss()
         snackBarSemaphore.signal()
