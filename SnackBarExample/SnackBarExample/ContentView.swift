@@ -38,6 +38,10 @@ struct ContentView: View {
             .frame(width: UIScreen.main.bounds.width - 32)
             .background(Color.black.opacity(0.7))
             .clipShape(RoundedRectangle(cornerRadius: 12))
+        }, configure: {
+            $0.position(.bottom)
+                .padding(20)
+                .animation(.easeInOut)
         })
     }
 }

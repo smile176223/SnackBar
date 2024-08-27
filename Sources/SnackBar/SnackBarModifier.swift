@@ -14,6 +14,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     private var onAnimationComplete: () -> ()
     private var onAppear: () -> ()
     private var onTap: () -> ()
+    private var onDismiss: () -> ()
     private var parameters: SnackBarParameters
     private var isVisible: Bool
     private var shouldShowContent: Bool
@@ -23,13 +24,16 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     @State private var safeAreaInsets: EdgeInsets = EdgeInsets()
     @State private var currentOffset = CGPoint.outOfScreenPoint
     
-    @State private var isLandscape: Bool = UIDevice.current.orientation.isLandscape
+    // Drag
+    @GestureState private var dragTranslation: CGSize = .zero
+    @State private var lastDragPosition: CGSize = .zero
     
     public init(
         contentView: @escaping () -> ContentView,
         onAnimationComplete: @escaping () -> (),
         onAppear: @escaping () -> (),
         onTap: @escaping () -> (),
+        onDismiss: @escaping () -> (),
         parameters: SnackBarParameters,
         isVisible: Bool,
         shouldShowContent: Bool,
@@ -39,6 +43,7 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
         self.onAnimationComplete = onAnimationComplete
         self.onAppear = onAppear
         self.onTap = onTap
+        self.onDismiss = onDismiss
         self.parameters = parameters
         self.isVisible = isVisible
         self.shouldShowContent = shouldShowContent
@@ -110,6 +115,8 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
             .onAppear(perform: onAppear)
             .onRotate(perform: handleRotate)
         }
+        .offset(calculateDragOffset())
+        .addDragGesture(value: $dragTranslation, onEnded: onDragEnd)
     }
     
     private func moveWithAnimation(_ value: Bool) {
@@ -148,5 +155,53 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     private func moveOffset(_ value: Bool) {
         currentOffset = value ? CGPoint(x: displayOffsetX, y: displayOffsetY) : hiddenOffset
+    }
+}
+
+// Drag
+extension SnackBarModifier {
+    private func calculateDragOffset() -> CGSize {
+        if dragTranslation == .zero {
+            return lastDragPosition
+        }
+        
+        if shouldUpdatePosition(dragTranslation.height) {
+            return updateHeight(dragTranslation.height)
+        }
+        
+        return .zero
+    }
+    
+    private func onDragEnd(_ drag: DragGesture.Value) {
+        let refY = presenterFrame.height / 3
+        let height = drag.translation.height
+        
+        if shouldUpdatePosition(drag.translation.height) {
+            lastDragPosition = updateHeight(height)
+        }
+        
+        if abs(height) > refY {
+            onDismiss()
+            resetDragPosition()
+        }
+    }
+    
+    private func shouldUpdatePosition(_ height: CGFloat) -> Bool {
+        switch parameters.position {
+        case .top:
+            return height < 0
+        case .bottom:
+            return height > 0
+        }
+    }
+    
+    private func resetDragPosition() {
+        withAnimation {
+            lastDragPosition = .zero
+        }
+    }
+    
+    private func updateHeight(_ height: CGFloat) -> CGSize {
+        CGSize(width: 0, height: height)
     }
 }
