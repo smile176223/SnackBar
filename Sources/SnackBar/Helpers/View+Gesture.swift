@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  View+Gesture.swift
+//  SnackBar
 //
 //  Created by Liam on 2024/8/26.
 //
