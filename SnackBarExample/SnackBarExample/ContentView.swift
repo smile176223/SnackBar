@@ -8,7 +8,7 @@
 import SwiftUI
 import SnackBar
 
-struct ContentView: View {
+struct SnackBarView: View {
     
     @State private var isPresented: Bool = false
     
@@ -44,6 +44,52 @@ struct ContentView: View {
                 .padding(20)
                 .animation(Animation.easeInOut(duration: 0.3))
         })
+    }
+}
+
+struct RowView: View {
+    
+    let text: String
+    
+    var body: some View {
+        HStack {
+            Text(text)
+                .foregroundStyle(.black)
+                .font(.system(size: 16).bold())
+            
+            Spacer()
+        }
+        .padding()
+        .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white)
+                .shadow(color: .gray.opacity(0.4), radius: 5, x: 0, y: 2)
+        )
+    }
+}
+
+#Preview("Row") {
+    RowView(text: "Slide from bottom")
+}
+
+
+struct ContentView: View {
+    
+    var body: some View {
+        List {
+            Section {
+                RowView(text: "Slide from bottom")
+                RowView(text: "Slide from top")
+            } header: {
+                Text("SnackBar Example")
+                    .bold()
+                    .font(.title)
+            }
+        }
+        .listStyle(PlainListStyle())
+        .navigationTitle("SnackBar Example")
     }
 }
 
