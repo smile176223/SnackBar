@@ -24,11 +24,11 @@ struct ContentView: View {
         .snackBar($isPresented, content: {
             ZStack {
                 HStack {
-                    Image(systemName: "network")
+                    Image(systemName: "wifi.exclamationmark")
                         .foregroundColor(.white)
                     
-                    Text("No internet connect...")
-                        .font(.title3)
+                    Text("No internet connection")
+                        .font(.subheadline)
                         .foregroundColor(.white)
                     
                     Spacer()
@@ -38,10 +38,11 @@ struct ContentView: View {
             .frame(width: UIScreen.main.bounds.width - 32)
             .background(Color.black.opacity(0.7))
             .clipShape(RoundedRectangle(cornerRadius: 12))
-        }, configure: {
-            $0.position(.bottom)
+        }, configure: { parameters in
+            parameters
+                .position(.bottom)
                 .padding(20)
-                .animation(.easeInOut)
+                .animation(Animation.easeInOut(duration: 0.3))
         })
     }
 }
