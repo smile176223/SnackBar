@@ -12,7 +12,7 @@ A SwiftUI library designed to display a snack bar.
 - [X] Customizable design
 - [X] Handle tap events
 - [X] Handle device rotate events
-- [ ] Handle drag events
+- [X] Handle drag events
 
 ## Requirements
 
@@ -29,14 +29,14 @@ dependencies: [
 ```
 ## How to use
 ```swift
-Strcut YourView: View {
+Struct YourView: View {
 
     @State var isPresented: Bool = false
 
     var body: some View {
         View()
             .snackBar($isPresented, content: {
-                // Custom Content View
+                // Custom content view
                 ContentView()
             }, configure: {
                 // Custom configure
