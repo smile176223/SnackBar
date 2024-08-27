@@ -12,9 +12,24 @@ extension View {
     @ViewBuilder
     func addTapGesture(onTap: @escaping () -> Void) -> some View {
         self.simultaneousGesture(
-            TapGesture().onEnded {
-                onTap()
-            }
+            TapGesture()
+                .onEnded {
+                    onTap()
+                }
+        )
+    }
+}
+
+extension View {
+    
+    @ViewBuilder
+    func addDragGesture(value: GestureState<CGSize>, onEnded action: @escaping (DragGesture.Value) -> Void) -> some View {
+        self.simultaneousGesture(
+            DragGesture()
+                .updating(value) { dragValue, state, _ in
+                    state = dragValue.translation
+                }
+                .onEnded(action)
         )
     }
 }

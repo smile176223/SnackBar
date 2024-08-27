@@ -51,6 +51,7 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
             onAnimationComplete: handleAnimationComplete,
             onAppear: handleSnackBarAppear,
             onTap: handleTapEvents,
+            onDismiss: handleDismiss,
             parameters: parameters,
             isVisible: isSnackBarVisible,
             shouldShowContent: shouldShowContent
@@ -79,6 +80,10 @@ public struct ContainerModifier<ContentView: View>: ViewModifier {
     }
     
     private func handleTapEvents() {
+        handleDismiss()
+    }
+    
+    private func handleDismiss() {
         isPresented = false
     }
     
