@@ -10,11 +10,11 @@ import SwiftUI
 
 public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
-    private var contentView: () -> ContentView
-    private var onAnimationComplete: () -> ()
-    private var onAppear: () -> ()
-    private var onTap: () -> ()
-    private var onDismiss: () -> ()
+    private let contentView: () -> ContentView
+    private let onAnimationComplete: () -> Void
+    private let onAppear: () -> Void
+    private let onTap: () -> Void
+    private let onDismiss: () -> Void
     private var parameters: SnackBarParameters
     private var isVisible: Bool
     private var shouldShowContent: Bool
@@ -30,10 +30,10 @@ public struct SnackBarModifier<ContentView: View>: ViewModifier {
     
     public init(
         contentView: @escaping () -> ContentView,
-        onAnimationComplete: @escaping () -> (),
-        onAppear: @escaping () -> (),
-        onTap: @escaping () -> (),
-        onDismiss: @escaping () -> (),
+        onAnimationComplete: @escaping () -> Void,
+        onAppear: @escaping () -> Void,
+        onTap: @escaping () -> Void,
+        onDismiss: @escaping () -> Void,
         parameters: SnackBarParameters,
         isVisible: Bool,
         shouldShowContent: Bool,

@@ -10,21 +10,21 @@ import SwiftUI
 public struct ContainerModifier<ContentView: View>: ViewModifier {
     
     @Binding private var isPresented: Bool
-    private var contentView: () -> ContentView
-    private var onDismiss: () -> ()
+    private let contentView: () -> ContentView
+    private let onDismiss: () -> Void
     private let parameters: SnackBarParameters
     
     @State private var shouldShowContent = false
     @State private var isSnackBarVisible = false
     
     private let snackBarQueue = DispatchQueue(label: "snackBarQueue", qos: .utility)
-    private var snackBarSemaphore = DispatchSemaphore(value: 1)
-    private var debouncedWorkItem = DispatchWorkItemHolder()
+    private let snackBarSemaphore = DispatchSemaphore(value: 1)
+    private let debouncedWorkItem = DispatchWorkItemHolder()
     
     public init(
         isPresented: Binding<Bool>,
         contentView: @escaping () -> ContentView,
-        onDismiss: @escaping () -> (),
+        onDismiss: @escaping () -> Void,
         parameters: SnackBarParameters
     ) {
         _isPresented = isPresented
