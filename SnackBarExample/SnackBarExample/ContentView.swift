@@ -12,7 +12,8 @@ struct ContentView: View {
     
     @State var topSlide: Bool = false
     @State var bottomSlide: Bool = false
-    @State var retryBar: Bool = false
+    @State var retryTopBar: Bool = false
+    @State var retryBottomBar: Bool = false
     
     var body: some View {
         List {
@@ -32,7 +33,13 @@ struct ContentView: View {
                 ItemRowView(text: "Slide from bottom\nCustom button", color: .purple) {
                     BottomBarButtonView()
                 } onTap: {
-                    retryBar.toggle()
+                    retryBottomBar.toggle()
+                }
+                
+                ItemRowView(text: "Slide from top\nCustom button", color: .brown) {
+                    TopBarButtonView()
+                } onTap: {
+                    retryTopBar.toggle()
                 }
             } header: {
                 Text("Demo")
@@ -43,7 +50,8 @@ struct ContentView: View {
         .listStyle(PlainListStyle())
         .modifier(NormalViewModifier(isPresented: $bottomSlide, position: .bottom))
         .modifier(NormalViewModifier(isPresented: $topSlide, position: .top))
-        .modifier(RetryViewModifier(isPresented: $retryBar, position: .bottom))
+        .modifier(RetryViewModifier(isPresented: $retryBottomBar, position: .bottom))
+        .modifier(RetryViewModifier(isPresented: $retryTopBar, position: .top))
     }
 }
 

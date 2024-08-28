@@ -15,6 +15,7 @@
 		0CA8032C2C7ED44000A9B03B /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA8032B2C7ED44000A9B03B /* BottomBarView.swift */; };
 		0CA8032E2C7ED48100A9B03B /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA8032D2C7ED48100A9B03B /* TopBarView.swift */; };
 		0CA803302C7ED68D00A9B03B /* BottomBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA8032F2C7ED68D00A9B03B /* BottomBarButtonView.swift */; };
+		0CA803322C7EEEFE00A9B03B /* TopBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA803312C7EEEFE00A9B03B /* TopBarButtonView.swift */; };
 		0CC996E02C76B9E800597228 /* SnackBarExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996DF2C76B9E800597228 /* SnackBarExampleApp.swift */; };
 		0CC996E22C76B9E800597228 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC996E12C76B9E800597228 /* ContentView.swift */; };
 		0CC996E42C76B9EA00597228 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CC996E32C76B9EA00597228 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		0CA8032B2C7ED44000A9B03B /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		0CA8032D2C7ED48100A9B03B /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		0CA8032F2C7ED68D00A9B03B /* BottomBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarButtonView.swift; sourceTree = "<group>"; };
+		0CA803312C7EEEFE00A9B03B /* TopBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarButtonView.swift; sourceTree = "<group>"; };
 		0CC996DC2C76B9E800597228 /* SnackBarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnackBarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CC996DF2C76B9E800597228 /* SnackBarExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarExampleApp.swift; sourceTree = "<group>"; };
 		0CC996E12C76B9E800597228 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				0CA8032B2C7ED44000A9B03B /* BottomBarView.swift */,
 				0CA8032D2C7ED48100A9B03B /* TopBarView.swift */,
 				0CA8032F2C7ED68D00A9B03B /* BottomBarButtonView.swift */,
+				0CA803312C7EEEFE00A9B03B /* TopBarButtonView.swift */,
 			);
 			path = ItemRow;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CA803322C7EEEFE00A9B03B /* TopBarButtonView.swift in Sources */,
 				0CC996E22C76B9E800597228 /* ContentView.swift in Sources */,
 				0CA803292C7EB0BC00A9B03B /* Color+Extension.swift in Sources */,
 				0CA803262C7DCA2900A9B03B /* RetryViewModifier.swift in Sources */,
