@@ -43,7 +43,7 @@ struct ContentView: View {
                     textColor: .darkYellow,
                     color: .lightYellow
                 ) {
-                    BottomBarButtonView()
+                    BarButtonView(type: .bottom, color: .lightYellow)
                 } onTap: {
                     retryBottomBar.toggle()
                 }
@@ -53,7 +53,7 @@ struct ContentView: View {
                     textColor: .darkPurple,
                     color: .lightPurple
                 ) {
-                    TopBarButtonView()
+                    BarButtonView(type: .top, color: .lightPurple)
                 } onTap: {
                     retryTopBar.toggle()
                 }
