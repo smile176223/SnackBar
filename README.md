@@ -1,4 +1,4 @@
-# SnackBar
+# <img src="https://github.com/smile176223/SnackBar/blob/develop/Resources/Snackbar-icon.png" width="48"> SnackBar
 
 [![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
 [![Platforms](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](https://developer.apple.com/swift)
