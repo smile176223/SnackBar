@@ -10,39 +10,64 @@ import SnackBar
 
 struct ContentView: View {
     
-    @State private var isPresented: Bool = false
+    @State var topSlide: Bool = false
+    @State var bottomSlide: Bool = false
+    @State var retryTopBar: Bool = false
+    @State var retryBottomBar: Bool = false
     
     var body: some View {
-        ZStack {
-            Button {
-                isPresented.toggle()
-            } label: {
-                Text("SHOW")
+        List {
+            Section {
+                ItemRowView(
+                    text: "Bottom",
+                    textColor: .darkBlue,
+                    color: .lightBlue
+                ) {
+                    BarView(type: .bottom)
+                } onTap: {
+                    bottomSlide.toggle()
+                }
+                
+                ItemRowView(
+                    text: "Top",
+                    textColor: .darkGreen,
+                    color: .lightGreen
+                ) {
+                    BarView(type: .top)
+                } onTap: {
+                    topSlide.toggle()
+                }
+
+                ItemRowView(
+                    text: "Bottom\nCustom button",
+                    textColor: .darkYellow,
+                    color: .lightYellow
+                ) {
+                    BarButtonView(type: .bottom, color: .lightYellow)
+                } onTap: {
+                    retryBottomBar.toggle()
+                }
+                
+                ItemRowView(
+                    text: "Top\nCustom button",
+                    textColor: .darkPurple,
+                    color: .lightPurple
+                ) {
+                    BarButtonView(type: .top, color: .lightPurple)
+                } onTap: {
+                    retryTopBar.toggle()
+                }
+            } header: {
+                Text("Demo")
                     .bold()
+                    .font(.title)
             }
         }
-        .snackBar($isPresented, content: {
-            ZStack {
-                HStack {
-                    Image(systemName: "network")
-                        .foregroundColor(.white)
-                    
-                    Text("No internet connect...")
-                        .font(.title3)
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                }
-                .padding(16)
-            }
-            .frame(width: UIScreen.main.bounds.width - 32)
-            .background(Color.black.opacity(0.7))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-        }, configure: {
-            $0.position(.bottom)
-                .padding(20)
-                .animation(.easeInOut)
-        })
+        .listStyle(PlainListStyle())
+        .modifier(NormalViewModifier(isPresented: $bottomSlide, position: .bottom))
+        .modifier(NormalViewModifier(isPresented: $topSlide, position: .top))
+        .modifier(RetryViewModifier(isPresented: $retryBottomBar, position: .bottom))
+        .modifier(RetryViewModifier(isPresented: $retryTopBar, position: .top))
     }
 }
 
