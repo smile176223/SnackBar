@@ -33,7 +33,7 @@ struct BarButtonView: View {
     private func barButton() -> some View {
         Color.gray
             .opacity(0.9)
-            .frame(width: 150, height: 20)
+            .frame(width: UIScreen.main.bounds.width / 3, height: 20)
             .clipShape(RoundedRectangle(cornerRadius: 5))
             .overlay {
                 HStack{
