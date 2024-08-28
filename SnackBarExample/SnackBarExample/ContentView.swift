@@ -23,7 +23,7 @@ struct ContentView: View {
                     textColor: .darkBlue,
                     color: .lightBlue
                 ) {
-                    BottomBarView()
+                    BarView(type: .bottom)
                 } onTap: {
                     bottomSlide.toggle()
                 }
@@ -33,7 +33,7 @@ struct ContentView: View {
                     textColor: .darkGreen,
                     color: .lightGreen
                 ) {
-                    TopBarView()
+                    BarView(type: .top)
                 } onTap: {
                     topSlide.toggle()
                 }

@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum BarType {
+    case top
+    case bottom
+}
+
 struct ItemRowView<ContentView: View>: View {
     
     let text: String
