@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
 
                 ItemRowView(text: "Slide from bottom\nCustom button", color: .purple) {
-                    BottomBarView()
+                    BottomBarButtonView()
                 } onTap: {
                     retryBar.toggle()
                 }
