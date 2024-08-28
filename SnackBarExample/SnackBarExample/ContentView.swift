@@ -17,19 +17,19 @@ struct ContentView: View {
     var body: some View {
         List {
             Section {
-                RowView(text: "Slide from bottom") {
+                BottomItemRowView(text: "Slide from bottom", color: .lightBlue) {
                     bottomSlide.toggle()
                 }
                 
-                RowView(text: "Slide from top") {
+                BottomItemRowView(text: "Slide from top", color: .orange) {
                     topSlide.toggle()
                 }
                 
-                RowView(text: "Slide from bottom with Button") {
+                BottomItemRowView(text: "Slide from bottom\nCustom button", color: .purple) {
                     retryBar.toggle()
                 }
             } header: {
-                Text("SnackBar Example")
+                Text("Demo")
                     .bold()
                     .font(.title)
             }
