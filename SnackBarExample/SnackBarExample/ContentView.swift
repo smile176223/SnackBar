@@ -17,15 +17,21 @@ struct ContentView: View {
     var body: some View {
         List {
             Section {
-                BottomItemRowView(text: "Slide from bottom", color: .lightBlue) {
+                ItemRowView(text: "Slide from bottom", color: .lightBlue) {
+                    BottomBarView()
+                } onTap: {
                     bottomSlide.toggle()
                 }
                 
-                BottomItemRowView(text: "Slide from top", color: .orange) {
+                ItemRowView(text: "Slide from top", color: .orange) {
+                    TopBarView()
+                } onTap: {
                     topSlide.toggle()
                 }
-                
-                BottomItemRowView(text: "Slide from bottom\nCustom button", color: .purple) {
+
+                ItemRowView(text: "Slide from bottom\nCustom button", color: .purple) {
+                    BottomBarView()
+                } onTap: {
                     retryBar.toggle()
                 }
             } header: {
