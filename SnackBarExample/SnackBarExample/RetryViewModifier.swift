@@ -8,6 +8,38 @@
 import SwiftUI
 import SnackBar
 
+struct RetryView: View {
+    
+    var body: some View {
+        ZStack {
+            HStack {
+                Text("Can't send message. Retry in 5 seconds.")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                
+                Spacer()
+                
+                Button {
+                    // Retry action
+                } label: {
+                    Text("Retry")
+                        .font(.subheadline)
+                        .foregroundStyle(.orange)
+                }
+
+            }
+            .padding(16)
+        }
+        .frame(width: UIScreen.main.bounds.width - 32)
+        .background(Color.black.opacity(0.7))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+}
+
+#Preview {
+    RetryView()
+}
+
 struct RetryViewModifier: ViewModifier {
     
     @Binding var isPresented: Bool
@@ -16,28 +48,7 @@ struct RetryViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .snackBar($isPresented, content: {
-                ZStack {
-                    HStack {
-                        Text("Can't send message. Retry in 5 seconds.")
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                        
-                        Spacer()
-                        
-                        Button {
-                            // Retry action
-                        } label: {
-                            Text("Retry")
-                                .font(.subheadline)
-                                .foregroundStyle(.orange)
-                        }
-
-                    }
-                    .padding(16)
-                }
-                .frame(width: UIScreen.main.bounds.width - 32)
-                .background(Color.black.opacity(0.7))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                RetryView()
             }, configure: { parameters in
                 parameters
                     .position(position)

@@ -25,7 +25,7 @@ struct ContentView: View {
                     topSlide.toggle()
                 }
                 
-                RowView(text: "Slide from bottom with Buttom") {
+                RowView(text: "Slide from bottom with Button") {
                     retryBar.toggle()
                 }
             } header: {
