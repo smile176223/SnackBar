@@ -1,5 +1,5 @@
 //
-//  BottomBarButtonView.swift
+//  BarButtonView.swift
 //  SnackBarExample
 //
 //  Created by Liam on 2024/8/28.
