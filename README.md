@@ -6,8 +6,6 @@
 
 A SwiftUI library designed to display a snack bar.
 
-<img src="https://github.com/smile176223/SnackBar/blob/develop/Resources/Snackbar-01.png" width="388">
-
 ## Features
 
 - [x] Display `SnackBar`
