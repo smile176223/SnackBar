@@ -31,7 +31,7 @@ dependencies: [
 ```
 ## How to use
 ```swift
-Struct YourView: View {
+struct YourView: View {
 
     @State var isPresented: Bool = false
 
