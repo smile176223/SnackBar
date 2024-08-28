@@ -18,25 +18,41 @@ struct ContentView: View {
     var body: some View {
         List {
             Section {
-                ItemRowView(text: "Slide from bottom", color: .lightBlue) {
+                ItemRowView(
+                    text: "Bottom",
+                    textColor: .darkBlue,
+                    color: .lightBlue
+                ) {
                     BottomBarView()
                 } onTap: {
                     bottomSlide.toggle()
                 }
                 
-                ItemRowView(text: "Slide from top", color: .orange) {
+                ItemRowView(
+                    text: "Top",
+                    textColor: .darkGreen,
+                    color: .lightGreen
+                ) {
                     TopBarView()
                 } onTap: {
                     topSlide.toggle()
                 }
 
-                ItemRowView(text: "Slide from bottom\nCustom button", color: .purple) {
+                ItemRowView(
+                    text: "Bottom\nCustom button",
+                    textColor: .darkYellow,
+                    color: .lightYellow
+                ) {
                     BottomBarButtonView()
                 } onTap: {
                     retryBottomBar.toggle()
                 }
                 
-                ItemRowView(text: "Slide from top\nCustom button", color: .brown) {
+                ItemRowView(
+                    text: "Top\nCustom button",
+                    textColor: .darkPurple,
+                    color: .lightPurple
+                ) {
                     TopBarButtonView()
                 } onTap: {
                     retryTopBar.toggle()

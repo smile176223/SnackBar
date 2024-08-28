@@ -14,8 +14,8 @@ struct BottomBarButtonView: View {
             
             Spacer()
             
-            Color.black
-                .opacity(0.7)
+            Color.gray
+                .opacity(0.9)
                 .frame(width: 150, height: 20)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .overlay {
@@ -23,7 +23,7 @@ struct BottomBarButtonView: View {
                         
                         Spacer()
                         
-                        Color.purple
+                        Color.lightYellow
                             .frame(width: 20, height: 10)
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                             .padding(.trailing, 10)

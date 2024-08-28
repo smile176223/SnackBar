@@ -10,13 +10,14 @@ import SwiftUI
 struct ItemRowView<ContentView: View>: View {
     
     let text: String
+    let textColor: Color
     let color: Color
     let content: () -> ContentView
     let onTap: () -> Void
     
     var body: some View {
         color
-            .frame(height: 150)
+            .frame(height: 130)
             .clipShape(RoundedRectangle(cornerRadius: 30))
             .overlay {
                 
@@ -26,11 +27,14 @@ struct ItemRowView<ContentView: View>: View {
                         Spacer()
                         
                         Text(text)
-                            .foregroundColor(Color.lightGray)
-                            .font(.footnote)
+                            .foregroundColor(textColor)
+                            .font(.footnote.bold())
+                        
+                        Color.lightGray
+                            .frame(width: 80, height: 2)
                         
                         Text("SnackBar")
-                            .foregroundColor(.white)
+                            .foregroundColor(textColor)
                             .font(.title2.bold())
                     }
                     .padding(.bottom, 20)
@@ -48,5 +52,5 @@ struct ItemRowView<ContentView: View>: View {
 }
 
 #Preview {
-    ItemRowView(text: "Description", color: .lightBlue, content: { EmptyView() }, onTap: {})
+    ItemRowView(text: "Description", textColor: .darkGreen, color: .lightBlue, content: { EmptyView() }, onTap: {})
 }
