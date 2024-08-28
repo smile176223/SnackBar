@@ -35,7 +35,7 @@ struct ItemRowView<ContentView: View>: View {
                             .foregroundColor(textColor)
                             .font(.footnote.bold())
                         
-                        Color.lightGray
+                        Color.gray
                             .frame(width: 80, height: 2)
                         
                         Text("SnackBar")

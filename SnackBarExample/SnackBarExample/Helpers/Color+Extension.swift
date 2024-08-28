@@ -27,7 +27,6 @@ extension Color {
     static var lightGreen: Color { Color(hex: "e1f8e2") }
     static var lightYellow: Color { Color(hex: "f8f0e1") }
     static var lightPurple: Color { Color(hex: "efe9fb") }
-    static var lightGray: Color { Color(hex: "D5D4D4") }
     
     static var darkBlue: Color { Color(hex: "3b80bc") }
     static var darkGreen: Color { Color(hex: "4ea637") }
